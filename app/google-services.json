@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "921569537824",
+    "firebase_url": "https://inventory-app-c44ee-default-rtdb.firebaseio.com",
+    "project_id": "inventory-app-c44ee",
+    "storage_bucket": "inventory-app-c44ee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:921569537824:android:7d075c71d7cbffe1a73145",
+        "android_client_info": {
+          "package_name": "com.zexceed.skripsiehapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "921569537824-uovv2ngbr46t9osij3pr6njgch0orm1j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSOaS1uyMd3HChaAkVflreHggYtuPaUPs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "921569537824-uovv2ngbr46t9osij3pr6njgch0orm1j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
