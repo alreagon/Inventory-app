@@ -7,4 +7,46 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+<!--    primary-color-->
+    <color name="primary_color_70">#568F6D</color>
+    <color name="primary_color_60">#7DAB8B</color>
+    <color name="primary_color_50">#ABC7B1</color>
+    <color name="primary_color_40">#C6DDC8</color>
+    <color name="primary_color_30">#DAEEDA</color>
+
+<!--    secondary-color-->
+    <color name="secondary_color_70">#569896</color>
+    <color name="secondary_color_60">#7DB6AF</color>
+    <color name="secondary_color_50">#ABD4CB</color>
+    <color name="secondary_color_40">#C3E5DA</color>
+    <color name="secondary_color_30">#D6F2E6</color>
+
+<!--    success-color-->
+    <color name="success_color_70">#0A926C</color>
+    <color name="success_color_60">#0EAF71</color>
+    <color name="success_color_50">#14CC73</color>
+    <color name="success_color_40">#48E087</color>
+    <color name="success_color_30">#6DEF97</color>
+
+<!--    warning-color-->
+    <color name="warning_color_70">#B79213</color>
+    <color name="warning_color_60">#DBB41B</color>
+    <color name="warning_color_50">#FFD726</color>
+    <color name="warning_color_40">#FFE45C</color>
+    <color name="warning_color_30">#FFEB7C</color>
+
+<!--    danger-color-->
+    <color name="danger_color_70">#B73845</color>
+    <color name="danger_color_60">#DB5154</color>
+    <color name="danger_color_50">#FF7970</color>
+    <color name="danger_color_40">#FFA393</color>
+    <color name="danger_color_30">#FFBCA9</color>
+
+<!--    font-color-->
+    <color name="font_color_drak">#171717</color>
+    <color name="font_color_old_grey">#909090</color>
+    <color name="font_color_grey">#B5B5B5</color>
+
+
 </resources>

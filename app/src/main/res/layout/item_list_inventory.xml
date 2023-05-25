@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.circularreveal.CircularRevealLinearLayout
+            android:id="@+id/ll_nama"
+            android:layout_width="168dp"
+            android:layout_height="133dp"
+            android:layout_marginStart="-9dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/border"
+            android:orientation="vertical"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toEndOf="@id/iv_list"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/font_color_drak">
+
+            <TextView
+                android:id="@+id/tv_itemName"
+                style="@style/Bold_Body_em"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="13dp"
+                android:maxLines="1"
+                android:text="@string/nama_barang_nya" />
+
+
+            <LinearLayout
+                android:id="@+id/ll_tanggalKembali"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/ic_qrcode" />
+
+                <TextView
+                    android:id="@+id/tv_kodeBarangTitle"
+                    style="@style/Medium_Body_sm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text="@string/kode_barang" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_kodeBarang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="41dp"
+                android:fontFamily="@font/plusjakartasans_regular"
+                android:text="@string/kodeBarang"
+                android:textColor="@color/font_color_drak"
+                android:textSize="10sp" />
+
+            <LinearLayout
+                android:id="@+id/ll_peminjam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/ic_exclamation_circle" />
+
+                <TextView
+                    android:id="@+id/tv_statusTitle"
+                    style="@style/Medium_Body_sm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text="@string/status" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="41dp"
+                android:fontFamily="@font/plusjakartasans_regular"
+                android:text="@string/tersedia"
+                android:textColor="@color/font_color_drak"
+                android:textSize="10sp" />
+
+
+        </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_list"
+            android:layout_width="129dp"
+            android:layout_height="145dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/sapu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/RoundedSquare"
+            app:strokeColor="@color/black"
+            app:strokeWidth="2dp" />
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/iv_list_border"-->
+        <!--            android:layout_width="130dp"-->
+        <!--            android:layout_height="146dp"-->
+        <!--            android:background="@drawable/border"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:shapeAppearanceOverlay="@style/RoundedSquare" />-->
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
