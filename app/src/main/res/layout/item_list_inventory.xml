@@ -20,7 +20,7 @@
             android:scaleType="centerCrop"
             app:layout_constraintStart_toEndOf="@id/iv_list"
             app:layout_constraintTop_toTopOf="parent"
-            app:strokeColor="@color/font_color_drak">
+            app:strokeColor="@color/font_color_dark">
 
             <TextView
                 android:id="@+id/tv_itemName"
@@ -66,7 +66,7 @@
                 android:layout_marginStart="41dp"
                 android:fontFamily="@font/plusjakartasans_regular"
                 android:text="@string/kodeBarang"
-                android:textColor="@color/font_color_drak"
+                android:textColor="@color/font_color_dark"
                 android:textSize="10sp" />
 
             <LinearLayout
@@ -101,7 +101,7 @@
                 android:layout_marginStart="41dp"
                 android:fontFamily="@font/plusjakartasans_regular"
                 android:text="@string/tersedia"
-                android:textColor="@color/font_color_drak"
+                android:textColor="@color/font_color_dark"
                 android:textSize="10sp" />
 
 

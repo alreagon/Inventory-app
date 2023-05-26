@@ -44,7 +44,7 @@
     <color name="danger_color_30">#FFBCA9</color>
 
 <!--    font-color-->
-    <color name="font_color_drak">#171717</color>
+    <color name="font_color_dark">#171717</color>
     <color name="font_color_old_grey">#909090</color>
     <color name="font_color_grey">#B5B5B5</color>
 
