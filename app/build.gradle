@@ -88,4 +88,7 @@ dependencies {
     // Nested Scroll View
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
 
+    // ElasticView
+//    implementation 'com.github.armcha:ElasticView:0.2.0'
+    implementation "com.github.skydoves:elasticviews:2.1.0"
 }

@@ -13,6 +13,7 @@ import com.google.firebase.ktx.Firebase
 import com.zexceed.skripsiehapp.model.Inventory
 import com.zexceed.skripsiehapp.model.Peminjaman
 import com.zexceed.skripsiehapp.model.User
+import java.lang.Exception
 
 class UserRepository {
     private val auth = Firebase.auth
@@ -29,7 +30,6 @@ class UserRepository {
         savedPeminjaman.value = arrayListOf()
         savedInventory.value = arrayListOf()
     }
-
 
     suspend fun login(email: String, password: String): MutableLiveData<String> {
         val message = MutableLiveData<String>()
@@ -388,22 +388,27 @@ class UserRepository {
 
 
     //    === Account ===
-    suspend fun changeEmailAndName(email: String, namaUkm: String): MutableLiveData<String> {
+    suspend fun changeAccount(
+        email: String,
+        namaUkm: String,
+        password: String
+    ): MutableLiveData<String> {
         val user = auth.currentUser
         val statusLiveData = MutableLiveData<String>()
         statusLiveData.postValue("LOADING")
         val profileUpdates = userProfileChangeRequest {
             displayName = namaUkm
+            displayName = password
         }
         user!!.apply {
             updateEmail(email)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Log.d(ContentValues.TAG, "User email address updated.")
+                        Log.d(ContentValues.TAG, "User updated.")
                         updateProfile(profileUpdates)
                             .addOnCompleteListener { mTask ->
                                 if (mTask.isSuccessful) {
-                                    Log.d(ContentValues.TAG, "User email address updated.")
+                                    Log.d(ContentValues.TAG, "User updated.")
                                     val mCurrentUser = auth.currentUser
                                     val user = User(
                                         mCurrentUser!!.uid,
@@ -413,6 +418,16 @@ class UserRepository {
                                     database.collection("userUkm")
                                         .document(user.id)
                                         .update("namaUkm", user.namaUkm)
+                                        .addOnSuccessListener {
+                                            _currentUserLiveData.postValue(auth.currentUser)
+                                        }.addOnFailureListener {
+                                            Log.d("TEZZ", "Error : $it")
+                                            statusLiveData.postValue("$it")
+                                            _currentUserLiveData.postValue(auth.currentUser)
+                                        }
+                                    database.collection("userUkm")
+                                        .document(user.id)
+                                        .update("password", user.password)
                                         .addOnSuccessListener {
                                             _currentUserLiveData.postValue(auth.currentUser)
                                         }.addOnFailureListener {
@@ -437,33 +452,21 @@ class UserRepository {
         return statusLiveData
     }
 
-    suspend fun changePassword(oldPassword: String, newPassword: String): MutableLiveData<String> {
-        val user = auth.currentUser
-        val statusLiveData = MutableLiveData<String>()
-        statusLiveData.postValue("LOADING")
-        val credential = EmailAuthProvider.getCredential(
-            user?.email.toString(),
-            oldPassword
-        )
-
-        user?.reauthenticate(credential)
-            ?.addOnSuccessListener {
-                user.updatePassword(newPassword).addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        _currentUserLiveData.value = auth.currentUser
-
-                        Log.w(ContentValues.TAG, task.toString())
-                        statusLiveData.postValue("SUCCESS")
-                    } else {
-                        Log.w(ContentValues.TAG, task.exception)
-                        statusLiveData.postValue("$it")
-                    }
-                }
-            }?.addOnFailureListener {
-                Log.w(ContentValues.TAG, it)
-                statusLiveData.postValue("$it")
-            }
-        return statusLiveData
+    suspend fun logout(): MutableLiveData<String> {
+        val message = MutableLiveData<String>()
+        message.postValue("LOADING")
+        try {
+            auth.signOut()
+            savedPeminjaman.postValue(arrayListOf())
+            savedPeminjamanId.postValue(arrayListOf())
+            savedInventory.postValue(arrayListOf())
+            savedInventoryId.postValue(arrayListOf())
+            _currentUserLiveData.postValue(auth.currentUser)
+            message.postValue("SUCCESS")
+        } catch (e: Exception) {
+            message.postValue(e.toString())
+        }
+        return message
     }
 
 
