@@ -69,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
             }
             tvToregister.setOnClickListener {
                 startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
-                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_right)
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
                 finish()
             }
         }

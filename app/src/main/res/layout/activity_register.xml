@@ -81,7 +81,8 @@
         app:errorIconDrawable="@null"
         app:hintTextColor="@color/font_color_dark"
         app:passwordToggleDrawable="@drawable/selector_password"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@null">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPassword"
@@ -108,7 +109,8 @@
         app:errorIconDrawable="@null"
         app:hintTextColor="@color/font_color_dark"
         app:passwordToggleDrawable="@drawable/selector_password"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@null">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etConPassword"
@@ -147,6 +149,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/plusjakartasans_regular"
             android:text="@string/readyAccount"
+            android:textColor="@color/font_color_dark"
             android:textSize="14sp" />
 
         <TextView
@@ -156,6 +159,7 @@
             android:layout_marginStart="3dp"
             android:fontFamily="@font/plusjakartasans_bold"
             android:text="@string/login"
+            android:textColor="@color/font_color_dark"
             android:textSize="14sp" />
     </LinearLayout>
 
