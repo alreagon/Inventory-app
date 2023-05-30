@@ -1,24 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@drawable/background_gradient"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingHorizontal="35dp"
     tools:context=".ui.register.RegisterActivity">
 
+    <ImageView
+        android:layout_width="185dp"
+        android:layout_height="57dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_register" />
+
+
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.Material3.TextInputLayout.FilledBox"
+        android:id="@+id/till_ukmName"
+        style="?attr/textInputFilledStyle"
         android:layout_width="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_height="wrap_content"
-        android:hint="dsadsadasd">
+        android:layout_marginTop="71dp"
+        android:background="@drawable/border_input"
+        android:textColorHint="@color/font_color_dark"
+        app:boxBackgroundColor="@color/putih"
+        app:boxStrokeColor="@color/primary_color_50"
+        app:errorIconDrawable="@null"
+        app:hintTextColor="@color/font_color_dark">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/dfkjsah"
+            android:id="@+id/etUkmName"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:hint="@string/nama_barang_nya"/>
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_input"
+            android:hint="@string/ukm_name"
+            android:singleLine="true"
+            android:textColor="@color/font_color_dark"
+            android:textColorHint="@color/font_color_dark" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_email"
+        style="?attr/textInputFilledStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/border_input"
+        android:textColorHint="@color/font_color_dark"
+        app:boxBackgroundColor="@color/putih"
+        app:boxStrokeColor="@color/primary_color_50"
+        app:errorIconDrawable="@null"
+        app:hintTextColor="@color/font_color_dark">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_input"
+            android:hint="@string/email"
+            android:singleLine="true"
+            android:textColor="@color/font_color_dark"
+            android:textColorHint="@color/font_color_dark" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_password"
+        style="?attr/textInputFilledStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/border_input"
+        android:textColorHint="@color/font_color_dark"
+        app:boxBackgroundColor="@color/putih"
+        app:boxStrokeColor="@color/primary_color_50"
+        app:errorIconDrawable="@null"
+        app:hintTextColor="@color/font_color_dark"
+        app:passwordToggleDrawable="@drawable/selector_password"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="15"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:textColor="@color/font_color_dark" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_ConPassword"
+        style="?attr/textInputFilledStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/border_input"
+        android:textColorHint="@color/font_color_dark"
+        app:boxBackgroundColor="@color/putih"
+        app:boxStrokeColor="@color/primary_color_50"
+        app:errorIconDrawable="@null"
+        app:hintTextColor="@color/font_color_dark"
+        app:passwordToggleDrawable="@drawable/selector_password"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etConPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="15"
+            android:hint="@string/confirm_password"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:textColor="@color/font_color_dark" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="48sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button_round"
+        android:fontFamily="@font/plusjakartasans_bold"
+        android:gravity="center"
+        android:text="@string/create_account"
+        android:textAllCaps="false"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/plusjakartasans_regular"
+            android:text="@string/readyAccount"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:fontFamily="@font/plusjakartasans_bold"
+            android:text="@string/login"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+
+    <!--        <TextView-->
+    <!--            android:backgroundTint="@drawable/logo_gradient"-->
+    <!--            android:id="@+id/tvLogin"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:fontFamily="@font/plusjakartasans_semibold"-->
+    <!--            android:gravity="center_horizontal"-->
+    <!--            android:text="Login"-->
+    <!--            android:textSize="46dp" />-->
+
+
+</LinearLayout>

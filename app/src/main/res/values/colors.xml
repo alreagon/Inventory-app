@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="putih">#F9F9FB</color>
+
 <!--    primary-color-->
     <color name="primary_color_70">#568F6D</color>
     <color name="primary_color_60">#7DAB8B</color>

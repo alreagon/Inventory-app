@@ -25,15 +25,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="71dp"
-        app:errorIconDrawable="@null">
+        android:background="@drawable/border_input"
+        android:textColorHint="@color/font_color_dark"
+        app:boxBackgroundColor="@color/putih"
+        app:boxStrokeColor="@color/primary_color_50"
+        app:errorIconDrawable="@null"
+        app:hintTextColor="@color/font_color_dark">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:background="@drawable/border_input"
+            android:hint="@string/email"
             android:singleLine="true"
-            android:textColor="@color/font_color_dark" />
+            android:textColor="@color/font_color_dark"
+            android:textColorHint="@color/font_color_dark" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -43,7 +50,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="@drawable/border_input"
+        android:textColorHint="@color/font_color_dark"
+        app:boxBackgroundColor="@color/putih"
+        app:boxStrokeColor="@color/primary_color_50"
         app:errorIconDrawable="@null"
+        app:hintTextColor="@color/font_color_dark"
         app:passwordToggleDrawable="@drawable/selector_password"
         app:passwordToggleEnabled="true">
 
@@ -52,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="15"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:singleLine="true"
             android:textColor="@color/font_color_dark" />
@@ -62,15 +74,39 @@
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="48sp"
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
         android:background="@drawable/button_round"
         android:fontFamily="@font/plusjakartasans_bold"
         android:gravity="center"
-        android:text="Login"
+        android:text="@string/login"
         android:textAllCaps="false"
-        android:textSize="14dp" />
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/plusjakartasans_regular"
+            android:text="@string/do_you_have_account"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_toregister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:fontFamily="@font/plusjakartasans_bold"
+            android:text="@string/regiter"
+            android:textSize="14sp" />
+    </LinearLayout>
 
 
     <!--        <TextView-->
