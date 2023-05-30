@@ -9,7 +9,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:paddingHorizontal="35dp"
-    tools:context=".ui.register.RegisterActivity">
+    tools:context=".features.auth.register.RegisterActivity">
 
     <ImageView
         android:layout_width="185dp"
@@ -150,7 +150,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/tv_register"
+            android:id="@+id/tv_toLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="3dp"

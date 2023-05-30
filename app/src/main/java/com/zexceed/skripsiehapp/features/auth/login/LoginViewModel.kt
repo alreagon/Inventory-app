@@ -1,4 +1,4 @@
-package com.zexceed.skripsiehapp.ui.login
+package com.zexceed.skripsiehapp.features.auth.login
 
 import androidx.lifecycle.ViewModel
 import com.zexceed.skripsiehapp.repository.UserRepository

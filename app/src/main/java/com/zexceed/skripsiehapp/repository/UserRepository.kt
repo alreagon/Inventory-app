@@ -55,7 +55,7 @@ class UserRepository {
 
     suspend fun register(
         email: String,
-        name: String,
+        namaUkm: String,
         password: String
     ): MutableLiveData<String> {
         val message = MutableLiveData<String>()
@@ -67,7 +67,7 @@ class UserRepository {
                     Log.d(ContentValues.TAG, "createUserWithEmail:success")
                     val user = auth.currentUser
                     val profileUpdates = userProfileChangeRequest {
-                        displayName = name
+                        displayName = namaUkm
                     }
                     user!!.updateProfile(profileUpdates)
                         .addOnCompleteListener { mTask ->

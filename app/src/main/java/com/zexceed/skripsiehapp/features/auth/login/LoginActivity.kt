@@ -1,4 +1,4 @@
-package com.zexceed.skripsiehapp.ui.login
+package com.zexceed.skripsiehapp.features.auth.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +8,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.zexceed.skripsiehapp.R
 import com.zexceed.skripsiehapp.databinding.ActivityLoginBinding
-import com.zexceed.skripsiehapp.ui.register.RegisterActivity
+import com.zexceed.skripsiehapp.features.auth.register.RegisterActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -67,10 +67,11 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
             }
-//            tvToRegister.setOnClickListener {
-//                startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
-//                finish()
-//            }
+            tvToregister.setOnClickListener {
+                startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_right)
+                finish()
+            }
         }
     }
 }

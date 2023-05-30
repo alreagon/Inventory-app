@@ -9,7 +9,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:paddingHorizontal="35dp"
-    tools:context=".ui.login.LoginActivity">
+    tools:context=".features.auth.login.LoginActivity">
 
 
     <ImageView
