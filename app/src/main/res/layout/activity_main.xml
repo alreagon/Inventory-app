@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/putih"
     tools:context=".view.activity.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -15,23 +16,32 @@
             android:id="@+id/toolBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
+            android:layout_marginTop="20dp"
+            android:background="@color/putih"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:layout_anchor="@+id/appBarLayout"
             app:layout_anchorGravity="bottom|center"
-            app:layout_scrollFlags="scroll|enterAlways" />
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/logo_nyimpen" />
+
+        </androidx.appcompat.widget.Toolbar>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            app:tabIndicatorColor="#a0a0a0"
+            android:background="@color/putih"
+            app:tabIndicatorColor="@color/primary_color_60"
             app:tabIndicatorHeight="3dp"
             app:tabMode="fixed"
-            app:tabSelectedTextColor="#a0a0a0"
-            app:tabTextColor="#000000" />
+            app:tabSelectedTextColor="@color/primary_color_60"
+            app:tabTextColor="@color/font_color_dark" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

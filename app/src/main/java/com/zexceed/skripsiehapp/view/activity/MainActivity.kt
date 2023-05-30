@@ -27,8 +27,24 @@ class MainActivity : AppCompatActivity() {
     private fun setupTabLayout() {
         TabLayoutMediator(
             binding.tabLayout, binding.viewPager
-        ) { tab, position -> tab.text = "Tab " + (position + 1) }.attach()
+        ) { tab, position ->
+            when (position) {
+                0 -> {
+                    tab.text = "Peminjaman"
+                }
+                1 -> {
+                    tab.text = "Inventory"
+                }
+            }
+        }.attach()
     }
+//    private fun setupTabLayout() {
+//        TabLayoutMediator(
+//            binding.tabLayout, binding.viewPager
+//        ) { tab, position -> tab.text = "Tab " + (position + 1) }
+//
+//            .attach()
+//    }
 
     private fun setupViewPager() {
         val adapter = ViewPagerAdapter(this, 2)
