@@ -9,7 +9,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:paddingHorizontal="35dp"
-    tools:context=".features.auth.register.RegisterActivity">
+    tools:context=".view.activity.RegisterActivity">
 
     <ImageView
         android:layout_width="185dp"

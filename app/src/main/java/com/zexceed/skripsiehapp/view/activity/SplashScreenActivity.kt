@@ -1,4 +1,4 @@
-package com.zexceed.skripsiehapp.features.splash
+package com.zexceed.skripsiehapp.view.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -7,9 +7,7 @@ import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.zexceed.skripsiehapp.MainActivity
 import com.zexceed.skripsiehapp.R
-import com.zexceed.skripsiehapp.features.auth.login.LoginActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {

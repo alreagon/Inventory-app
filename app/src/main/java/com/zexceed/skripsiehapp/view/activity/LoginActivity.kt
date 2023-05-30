@@ -1,4 +1,4 @@
-package com.zexceed.skripsiehapp.features.auth.login
+package com.zexceed.skripsiehapp.view.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +8,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.zexceed.skripsiehapp.R
 import com.zexceed.skripsiehapp.databinding.ActivityLoginBinding
-import com.zexceed.skripsiehapp.features.auth.register.RegisterActivity
+import com.zexceed.skripsiehapp.viewmodel.LoginViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -73,5 +73,8 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             }
         }
+    }
+    companion object {
+        const val TAG = "LoginActivity"
     }
 }

@@ -45,7 +45,7 @@ class PeminjamanRepository {
     }
 
     fun getAllPeminjaman(): MutableLiveData<ArrayList<Peminjaman>> {
-        database.collection("Peminjaman").addSnapshotListener { snapshot, e ->
+        database.collection("peminjaman").addSnapshotListener { snapshot, e ->
             if (e != null) {
                 Log.w("TEZ", "Listen failed.", e)
                 return@addSnapshotListener
