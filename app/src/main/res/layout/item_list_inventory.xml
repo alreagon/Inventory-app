@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
+    android:id="@+id/cardInventory"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -10,7 +11,7 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.circularreveal.CircularRevealLinearLayout
-            android:id="@+id/ll_nama"
+            android:id="@+id/llNama"
             android:layout_width="168dp"
             android:layout_height="133dp"
             android:layout_marginStart="-9dp"
@@ -18,12 +19,12 @@
             android:background="@drawable/border"
             android:orientation="vertical"
             android:scaleType="centerCrop"
-            app:layout_constraintStart_toEndOf="@id/iv_list"
+            app:layout_constraintStart_toEndOf="@id/ivList"
             app:layout_constraintTop_toTopOf="parent"
             app:strokeColor="@color/font_color_dark">
 
             <TextView
-                android:id="@+id/tv_itemName"
+                android:id="@+id/tvItemName"
                 style="@style/Bold_Body_em"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -34,7 +35,7 @@
 
 
             <LinearLayout
-                android:id="@+id/ll_tanggalKembali"
+                android:id="@+id/llTanggalKembali"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -50,7 +51,7 @@
                     android:src="@drawable/ic_qrcode" />
 
                 <TextView
-                    android:id="@+id/tv_kodeBarangTitle"
+                    android:id="@+id/tvKodeBarangTitle"
                     style="@style/Medium_Body_sm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -60,7 +61,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_kodeBarang"
+                android:id="@+id/tvKodeBarang"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="41dp"
@@ -70,7 +71,7 @@
                 android:textSize="10sp" />
 
             <LinearLayout
-                android:id="@+id/ll_peminjam"
+                android:id="@+id/llPeminjam"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -85,7 +86,7 @@
                     android:src="@drawable/ic_exclamation_circle" />
 
                 <TextView
-                    android:id="@+id/tv_statusTitle"
+                    android:id="@+id/tvStatusTitle"
                     style="@style/Medium_Body_sm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -95,7 +96,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_status"
+                android:id="@+id/tvStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="41dp"
@@ -108,7 +109,7 @@
         </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/iv_list"
+            android:id="@+id/ivList"
             android:layout_width="129dp"
             android:layout_height="145dp"
             android:scaleType="centerCrop"

@@ -2,10 +2,21 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android"
     android:fillAfter="true">
 
-    <rotate
+    <translate
         android:duration="300"
-        android:fromDegrees="45"
+        android:fromYDelta="0%"
+        android:toYDelta="100%" />
+
+    <scale
+        android:fromXScale="0.8"
+        android:fromYScale="0.8"
         android:pivotX="50%"
         android:pivotY="50%"
-        android:toDegrees="0" />
+        android:toXScale="0.8"
+        android:toYScale="0.8" />
+
+    <alpha
+        android:duration="150"
+        android:fromAlpha="1"
+        android:toAlpha="0" />
 </set>

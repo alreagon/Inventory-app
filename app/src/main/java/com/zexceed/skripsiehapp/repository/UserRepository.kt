@@ -189,7 +189,7 @@ class UserRepository {
                         val user = document.toObject(User::class.java)
                         Log.d(ContentValues.TAG, "DocumentSnapshot data: ${document.data}")
                         user?.listPeminjamanId?.add(peminjamanId)
-                        database.collection("userUkm").document(currentUser!!.uid)
+                        database.collection("userUkm").document(currentUser.uid)
                             .set(user!!).addOnSuccessListener {
                                 Log.d("TEZ", "Current data: $it")
                                 savedPeminjamanId.postValue(user.listPeminjamanId)
@@ -222,7 +222,7 @@ class UserRepository {
                         val user = document.toObject(User::class.java)
                         Log.d(ContentValues.TAG, "DocumentSnapshot data: ${document.data}")
                         user?.listPeminjamanId?.remove(peminjamanId)
-                        database.collection("userUkm").document(currentUser!!.uid)
+                        database.collection("userUkm").document(currentUser.uid)
                             .set(user!!).addOnSuccessListener {
                                 Log.d("TEZ", "Current data: $it")
                                 savedPeminjamanId.postValue(user.listPeminjamanId)
@@ -331,7 +331,7 @@ class UserRepository {
                         val user = document.toObject(User::class.java)
                         Log.d(ContentValues.TAG, "DocumentSnapshot data: ${document.data}")
                         user?.listInventoryId?.add(inventoryId)
-                        database.collection("userUkm").document(currentUser!!.uid)
+                        database.collection("userUkm").document(currentUser.uid)
                             .set(user!!).addOnSuccessListener {
                                 Log.d("TEZ", "Current data: $it")
                                 savedInventoryId.postValue(user.listInventoryId)
@@ -364,7 +364,7 @@ class UserRepository {
                         val user = document.toObject(User::class.java)
                         Log.d(ContentValues.TAG, "DocumentSnapshot data: ${document.data}")
                         user?.listInventoryId?.remove(inventoryId)
-                        database.collection("userUkm").document(currentUser!!.uid)
+                        database.collection("userUkm").document(currentUser.uid)
                             .set(user!!).addOnSuccessListener {
                                 Log.d("TEZ", "Current data: $it")
                                 savedInventoryId.postValue(user.listInventoryId)

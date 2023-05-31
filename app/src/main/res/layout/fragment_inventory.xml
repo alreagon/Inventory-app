@@ -4,16 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     android:background="@color/putih"
     tools:context=".view.fragment.InventoryFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAllInventory"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="INI ADALAH INVENTORY"
-        android:textColor="@color/font_color_dark"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/inter_component_margin_normal"
+        android:nestedScrollingEnabled="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:spanCount="2"
+        tools:listitem="@layout/item_list_inventory" />
 </androidx.constraintlayout.widget.ConstraintLayout>

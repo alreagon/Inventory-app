@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.TextView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.zexceed.skripsiehapp.R
 import com.zexceed.skripsiehapp.databinding.FragmentPeminjamanBinding
 

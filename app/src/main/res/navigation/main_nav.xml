@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_nav">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/peminjamanFragment">
 
+    <fragment
+        android:id="@+id/peminjamanFragment"
+        android:name="com.zexceed.skripsiehapp.view.fragment.PeminjamanFragment"
+        android:label="fragment_peminjaman"
+        tools:layout="@layout/fragment_peminjaman" >
+        <action
+            android:id="@+id/action_peminjamanFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_peminjamanFragment_to_searchPeminjamanFragment"
+            app:destination="@id/searchPeminjamanFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.zexceed.skripsiehapp.view.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_peminjamanFragment"
+            app:destination="@id/peminjamanFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_inventoryFragment"
+            app:destination="@id/inventoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/inventoryFragment"
+        android:name="com.zexceed.skripsiehapp.view.fragment.InventoryFragment"
+        android:label="fragment_inventory"
+        tools:layout="@layout/fragment_inventory" >
+        <action
+            android:id="@+id/action_inventoryFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_inventoryFragment_to_searchInventoryFragment"
+            app:destination="@id/searchInventoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchInventoryFragment"
+        android:name="com.zexceed.skripsiehapp.view.fragment.SearchInventoryFragment"
+        android:label="fragment_search_inventory"
+        tools:layout="@layout/fragment_search_inventory" >
+        <action
+            android:id="@+id/action_searchInventoryFragment_to_inventoryFragment"
+            app:destination="@id/inventoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchPeminjamanFragment"
+        android:name="com.zexceed.skripsiehapp.view.fragment.SearchPeminjamanFragment"
+        android:label="fragment_search_peminjaman"
+        tools:layout="@layout/fragment_search_peminjaman" >
+        <action
+            android:id="@+id/action_searchPeminjamanFragment_to_peminjamanFragment"
+            app:destination="@id/peminjamanFragment" />
+    </fragment>
 </navigation>
