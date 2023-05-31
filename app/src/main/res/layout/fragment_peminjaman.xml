@@ -8,6 +8,7 @@
     tools:context=".view.fragment.PeminjamanFragment">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -17,54 +18,41 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/base_fab"
+        android:id="@+id/fabBase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="24dp"
+        android:backgroundTint="@color/primary_color_50"
         android:src="@drawable/ic_plus"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/call_fab"
+        android:id="@+id/fabSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/primary_color_50"
+        android:focusable="true"
         android:src="@drawable/ic_search"
+        android:visibility="invisible"
         app:fabSize="mini"
-        app:layout_constraintBottom_toTopOf="@+id/base_fab"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/text_one"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Audio Call"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@id/call_fab"
-        app:layout_constraintEnd_toStartOf="@id/call_fab"
-        app:layout_constraintTop_toTopOf="@id/call_fab" />
+        app:layout_constraintBottom_toTopOf="@+id/fabBase"
+        app:layout_constraintEnd_toEndOf="@id/fabBase"
+        app:layout_constraintStart_toStartOf="@id/fabBase" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/video_call_fab"
+        android:id="@+id/fabProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/primary_color_50"
+        android:focusable="true"
         android:src="@drawable/ic_profile"
+        android:visibility="invisible"
         app:fabSize="mini"
-        app:layout_constraintBottom_toTopOf="@id/call_fab"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/text_two"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Video Call"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@id/video_call_fab"
-        app:layout_constraintEnd_toStartOf="@id/video_call_fab"
-        app:layout_constraintTop_toTopOf="@id/video_call_fab" />
+        app:layout_constraintBottom_toTopOf="@id/fabSearch"
+        app:layout_constraintEnd_toEndOf="@id/fabBase"
+        app:layout_constraintStart_toStartOf="@id/fabBase" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

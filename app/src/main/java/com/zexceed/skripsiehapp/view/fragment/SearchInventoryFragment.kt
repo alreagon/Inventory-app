@@ -7,16 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import com.zexceed.skripsiehapp.R
 import com.zexceed.skripsiehapp.databinding.FragmentInventoryBinding
-import com.zexceed.skripsiehapp.databinding.FragmentPeminjamanBinding
+import com.zexceed.skripsiehapp.databinding.FragmentSearchInventoryBinding
 
-class InventoryFragment : Fragment() {
-    private var _binding: FragmentInventoryBinding? = null
+class SearchInventoryFragment : Fragment() {
+
+    private var _binding: FragmentSearchInventoryBinding? = null
     private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentInventoryBinding.inflate(inflater, container, false)
+        _binding = FragmentSearchInventoryBinding.inflate(inflater, container, false)
         return binding.root
     }
 
