@@ -20,6 +20,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class InventoryFragment : Fragment() {
+
+    val TAG: String = "InventoryFragment"
     private var _binding: FragmentInventoryBinding? = null
     private val binding get() = _binding!!
     private lateinit var inventoryViewModel: InventoryViewModel

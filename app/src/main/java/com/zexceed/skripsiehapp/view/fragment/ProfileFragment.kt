@@ -10,6 +10,8 @@ import com.zexceed.skripsiehapp.databinding.FragmentInventoryBinding
 import com.zexceed.skripsiehapp.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
+
+    val TAG : String = "ProfileFragment"
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     override fun onCreateView(

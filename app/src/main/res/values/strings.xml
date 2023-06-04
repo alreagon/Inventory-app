@@ -20,4 +20,29 @@
     <string name="readyAccount">Already have an account?</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="catatanDesk">Barang tersebut sekarang memiliki kondisi yang cukup mengenaskan, ada yang patah ada yang ilang dan lain sebagainya</string>
+    <string name="catatan">Catatan</string>
+    <string name="jumlah">Jumlah</string>
+    <string name="jaminanDesk">KTM peminjam</string>
+    <string name="jumlahDesk">2 pcs</string>
+    <string name="tanggal_pengembalian">Tanggal Pengembalian</string>
+    <string name="tanggalPengembalianDesk">24/04/2023</string>
+    <string name="tanggal_peminjaman">Tanggal Peminjaman</string>
+    <string name="tanggalPeminjamanDesk">12/04/2023</string>
+    <string name="kondisi_awal">Kondisi Awal</string>
+    <string name="kondisiAwalDesk">Kondisi mulus bersih putih dan wangy wangy</string>
+    <string name="deskripsi_barang">Deskripsi Barang</string>
+    <string name="deskripsiBarangDesk">Sapu ijuknya masih bagus bgt dan keren abis habis itu ya begitu ini cuman desksripsi yang dipanjangin aja</string>
+    <string name="organisasi_peminjam">Organisasi Peminjam</string>
+    <string name="organisasiExampleDesk">Badan Eksekutif Mahasiswa</string>
+    <string name="nama_peminjam">Nama Peminjam</string>
+    <string name="namaExample">Asep Saepudin</string>
+    <string name="kodeBarangDesk">IVT-101</string>
+    <string name="nama_barang">Nama Barang</string>
+    <string name="namaBarangDesk">Sapu Ijuk</string>
+    <string name="hapus">Hapus</string>
+    <string name="edit">Edit</string>
+    <string name="statusDesk">Tersedia/perlu perbaikan/dipinjam/Hilang/Dalam perbaikan/dipinjam/sedang dipakai/telah dikembalikan/telah dibuang/</string>
+    <string name="asal_barang">Asal Barang</string>
+    <string name="asalBarangDesk">Hibah/pemberian/hibah/sumbangan/beli</string>
 </resources>

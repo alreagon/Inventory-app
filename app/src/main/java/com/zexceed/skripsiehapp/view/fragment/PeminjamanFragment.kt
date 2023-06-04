@@ -12,6 +12,8 @@ import com.zexceed.skripsiehapp.databinding.FragmentPeminjamanBinding
 
 class PeminjamanFragment : Fragment() {
 
+    val TAG: String = "PeminjamanFragment"
+
     private val rotateOpen: Animation by lazy {
         AnimationUtils.loadAnimation(
             requireContext(),
@@ -120,4 +122,8 @@ class PeminjamanFragment : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

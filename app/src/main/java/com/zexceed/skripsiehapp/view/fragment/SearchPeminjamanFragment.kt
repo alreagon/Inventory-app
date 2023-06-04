@@ -13,6 +13,8 @@ import com.zexceed.skripsiehapp.viewmodel.PeminjamanViewModel
 
 class SearchPeminjamanFragment : Fragment() {
 
+    val TAG : String = "SearchPeminjamanFragment"
+
     private var _binding: FragmentSearchPeminjamanBinding? = null
     private lateinit var peminjamanViewModel: PeminjamanViewModel
     private val binding get() = _binding!!

@@ -11,6 +11,9 @@ import com.zexceed.skripsiehapp.databinding.FragmentSearchInventoryBinding
 
 class SearchInventoryFragment : Fragment() {
 
+    val TAG : String = "SearchInventoryFragment"
+
+
     private var _binding: FragmentSearchInventoryBinding? = null
     private val binding get() = _binding!!
     override fun onCreateView(
