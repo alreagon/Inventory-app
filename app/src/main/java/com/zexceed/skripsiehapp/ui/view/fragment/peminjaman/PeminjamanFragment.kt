@@ -94,7 +94,7 @@ class PeminjamanFragment : Fragment() {
             }
             fabProfile.setOnClickListener {
                 findNavController().navigate(
-                    R.id.action_PeminjamanFragment_to_PeminjamanProfileFragment2,
+                    R.id.action_PeminjamanFragment_to_PeminjamanprofileFragment,
                     Bundle().apply {
                         putParcelable("user", objUser)
                     })

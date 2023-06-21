@@ -22,8 +22,8 @@
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left" />
     <action
-        android:id="@+id/action_PeminjamanFragment_to_PeminjamanProfileFragment2"
-        app:destination="@id/profileFragment2"
+        android:id="@+id/action_PeminjamanFragment_to_PeminjamanprofileFragment"
+        app:destination="@id/profileFragment"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left" />
     <action
@@ -47,11 +47,21 @@
         app:destination="@id/inventoryAddFragment"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left" />
-
-
+    
+    <action
+        android:id="@+id/action_InventoryFragment_to_InventoryDetailFragment"
+        app:destination="@id/inventoryDetailFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left" />
+    
     <action
         android:id="@+id/action_InventoryFragment_to_InventorySearchFragment"
         app:destination="@id/inventorySearchFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left" />
+    <action
+        android:id="@+id/action_InventoryFragment_to_profileFragment"
+        app:destination="@id/profileFragment"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left" />
 
@@ -84,22 +94,22 @@
             app:exitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
-        android:id="@+id/profileFragment2"
+        android:id="@+id/profileFragment"
         android:name="com.zexceed.skripsiehapp.ui.view.fragment.auth.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile">
         <action
-            android:id="@+id/action_profileFragment2_to_editProfileFragment"
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left" />
         <action
-            android:id="@+id/action_profileFragment2_to_homeFragment"
+            android:id="@+id/action_profileFragment_to_homeFragment"
             app:destination="@id/homeFragment"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_profileFragment2_to_loginFragment"
+            android:id="@+id/action_profileFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
@@ -112,8 +122,8 @@
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile">
         <action
-            android:id="@+id/action_editProfileFragment_to_profileFragment2"
-            app:destination="@id/profileFragment2"
+            android:id="@+id/action_editProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
@@ -122,19 +132,6 @@
         android:name="com.zexceed.skripsiehapp.ui.view.fragment.inventory.InventoryFragment"
         android:label="fragment__inventory"
         tools:layout="@layout/fragment_inventory">
-        <action
-            android:id="@+id/action_InventoryFragment_to_profileFragment2"
-            app:destination="@id/profileFragment2"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
-        <action
-            android:id="@+id/action_InventoryFragment_to_inventoryDetailFragment"
-            app:destination="@id/inventoryDetailFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
-        <action
-            android:id="@+id/action_InventoryFragment_to_inventorySearchFragment"
-            app:destination="@id/inventorySearchFragment" />
     </fragment>
     <fragment
         android:id="@+id/peminjamanAddFragment"
@@ -155,9 +152,6 @@
         <action
             android:id="@+id/action_PeminjamanFragment_to_PeminjamanSearchFragment2"
             app:destination="@id/peminjamanSearchFragment" />
-        <action
-            android:id="@+id/action_PeminjamanFragment_to_profileFragment2"
-            app:destination="@id/profileFragment2" />
     </fragment>
     <fragment
         android:id="@+id/inventoryDetailFragment"
@@ -174,8 +168,10 @@
         android:label="fragment_inventory_add"
         tools:layout="@layout/fragment_inventory_add">
         <action
-            android:id="@+id/action_inventoryAddFragment_to_InventoryFragment"
-            app:destination="@id/InventoryFragment" />
+            android:id="@+id/action_inventoryAddFragment_to_homeFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/inventorySearchFragment"

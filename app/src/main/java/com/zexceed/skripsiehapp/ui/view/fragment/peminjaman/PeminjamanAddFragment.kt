@@ -81,7 +81,7 @@ class PeminjamanAddFragment : Fragment(R.layout.fragment_peminjaman_add) {
         updateUI()
         observer()
         binding.icBack.setOnClickListener {
-            findNavController().navigateUp()
+            findNavController().navigate(R.id.action_PeminjamanAddFragment_to_homeFragment)
         }
 
     }

@@ -61,7 +61,7 @@ class InventoryFragment : Fragment() {
         InventoryAdapter(
             onItemClicked = { pos, item ->
                 findNavController().navigate(
-                    R.id.action_InventoryFragment_to_inventoryDetailFragment,
+                    R.id.action_InventoryFragment_to_InventoryDetailFragment,
                     Bundle().apply {
                         putParcelable("inventory", item)
                     })
@@ -91,7 +91,7 @@ class InventoryFragment : Fragment() {
             }
             fabProfile.setOnClickListener {
                 findNavController().navigate(
-                    R.id.action_InventoryFragment_to_profileFragment2,
+                    R.id.action_InventoryFragment_to_profileFragment,
                     Bundle().apply {
                         putParcelable("user", objUser)
                     })

@@ -88,7 +88,7 @@ class EditProfileFragment : Fragment() {
                                             btnSave.setText("Saved!")
                                             progressBar.hide()
                                             Handler(Looper.getMainLooper()).postDelayed({
-                                                findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment2)
+                                                findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment)
                                             }, 1500)
                                         }
 
@@ -112,7 +112,7 @@ class EditProfileFragment : Fragment() {
             }
 
             icBackEditProfile.setOnClickListener {
-                findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment2)
+                findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment)
             }
         }
     }

@@ -38,7 +38,7 @@ class ProfileFragment : Fragment() {
         binding.apply {
             llEditProfile.setOnClickListener {
                 findNavController().navigate(
-                    R.id.action_profileFragment2_to_editProfileFragment,
+                    R.id.action_profileFragment_to_editProfileFragment,
                     Bundle().apply {
                         putParcelable("user", objUser)
                     })
@@ -47,11 +47,11 @@ class ProfileFragment : Fragment() {
             llLogoutProfile.setOnClickListener {
 //                showDialog()
                 authViewModel.logout {
-                    findNavController().navigate(R.id.action_profileFragment2_to_loginFragment)
+                    findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
                 }
             }
             icBackProfile.setOnClickListener {
-                findNavController().navigate(R.id.action_profileFragment2_to_homeFragment)
+                findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
             }
 
         }
@@ -71,7 +71,7 @@ class ProfileFragment : Fragment() {
 
         btnYes.setOnClickListener {
             authViewModel.logout {
-                findNavController().navigate(R.id.action_profileFragment2_to_loginFragment)
+                findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
             }
         }
         btnNo.setOnClickListener {

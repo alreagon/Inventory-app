@@ -81,7 +81,7 @@ class InventoryAddFragment : Fragment(R.layout.fragment_inventory_add) {
         updateUI()
         observer()
         binding.icBack.setOnClickListener {
-            findNavController().navigateUp()
+            findNavController().navigate(R.id.action_inventoryAddFragment_to_homeFragment)
         }
 
     }
