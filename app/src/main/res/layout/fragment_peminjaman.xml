@@ -5,30 +5,114 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/putih"
-    tools:context=".view.fragment.PeminjamanFragment">
+    tools:context=".ui.view.fragment.peminjaman.PeminjamanFragment">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="INI ADALAH PEMINJAMAN"
-        android:textColor="@color/font_color_dark"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvAllInventory"
-        android:layout_width="match_parent"
+    <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/inter_component_margin_normal"
-        android:nestedScrollingEnabled="false"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="135dp"
+        android:layout_marginEnd="252dp"
+        android:layout_marginBottom="438dp"
+        android:src="@drawable/ic_bg_archive"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:spanCount="2"
-        tools:listitem="@layout/item_list_inventory" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="81dp"
+        android:layout_marginBottom="394dp"
+        android:src="@drawable/ic_bg_inventory_flow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/ic_bg_open_box"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/ic_bg_delivered_box"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="147dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginEnd="165dp"
+        android:layout_marginBottom="286dp"
+        android:src="@drawable/ic_bg_product"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="288dp"
+        android:layout_marginTop="341dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="235dp"
+        android:src="@drawable/ic_bg_product"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="392dp"
+        android:layout_marginEnd="282dp"
+        android:layout_marginBottom="181dp"
+        android:src="@drawable/ic_bg_handcart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="94dp"
+        android:layout_marginTop="750dp"
+        android:layout_marginEnd="213dp"
+        android:layout_marginBottom="10dp"
+        android:rotationY="180"
+        android:src="@drawable/ic_bg_open_box"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="255dp"
+        android:layout_marginBottom="78dp"
+        android:src="@drawable/ic_bg_trolley"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabBase"
@@ -36,24 +120,52 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="64dp"
+        android:background="@color/font_color_dark"
         android:backgroundTint="@color/primary_color_50"
-        android:src="@drawable/ic_cross"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_plus"
+        android:tint="@color/font_color_dark"
+        android:tintMode="multiply"
+        app:backgroundTint="@color/font_color_dark"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_add_24"
+        app:tint="@color/font_color_dark" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="12dp"
         android:backgroundTint="@color/primary_color_50"
+        android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/ic_search"
+        android:src="@drawable/ic_search_24"
+        android:tint="@color/font_color_dark"
         android:visibility="invisible"
         app:fabSize="mini"
         app:layout_constraintBottom_toTopOf="@+id/fabBase"
         app:layout_constraintEnd_toEndOf="@id/fabBase"
-        app:layout_constraintStart_toStartOf="@id/fabBase" />
+        app:layout_constraintStart_toStartOf="@id/fabBase"
+        app:tint="@color/font_color_dark" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/primary_color_50"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_add_24"
+        android:tint="@color/font_color_dark"
+        android:visibility="invisible"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toTopOf="@id/fabSearch"
+        app:layout_constraintEnd_toEndOf="@id/fabBase"
+        app:layout_constraintStart_toStartOf="@id/fabBase"
+        app:tint="@color/font_color_dark" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabProfile"
@@ -61,12 +173,44 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:backgroundTint="@color/primary_color_50"
+        android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/ic_profile"
+        android:src="@drawable/ic_person_24"
+        android:tint="@color/font_color_dark"
         android:visibility="invisible"
         app:fabSize="mini"
-        app:layout_constraintBottom_toTopOf="@id/fabSearch"
+        app:layout_constraintBottom_toTopOf="@id/fabAdd"
         app:layout_constraintEnd_toEndOf="@id/fabBase"
-        app:layout_constraintStart_toStartOf="@id/fabBase" />
+        app:layout_constraintStart_toStartOf="@id/fabBase"
+        app:tint="@color/font_color_dark" />
+
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress_bar"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/black"
+        android:visibility="invisible"
+        app:indicatorColor="@color/primary_color_50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:trackCornerRadius="8dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="10dp"
+        android:clipToPadding="false"
+        android:paddingBottom="72dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progress_bar"
+        tools:listitem="@layout/item_list_peminjaman" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

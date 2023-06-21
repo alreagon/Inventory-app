@@ -2,13 +2,21 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardPeminjaman"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/white">
+    android:layout_marginTop="26dp"
+    android:background="@android:color/transparent"
+    android:elevation="@null"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardElevation="@null">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@color/putih"
+        android:foregroundTint="@color/putih">
 
         <com.google.android.material.circularreveal.CircularRevealLinearLayout
             android:id="@+id/ll_nama"
@@ -120,14 +128,14 @@
             app:strokeColor="@color/black"
             app:strokeWidth="2dp" />
 
-        <!--        <ImageView-->
-        <!--            android:id="@+id/iv_list_border"-->
-        <!--            android:layout_width="130dp"-->
-        <!--            android:layout_height="146dp"-->
-        <!--            android:background="@drawable/border"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent"-->
-        <!--            app:shapeAppearanceOverlay="@style/RoundedSquare" />-->
+        <ImageView
+            android:id="@+id/iv_list_border"
+            android:layout_width="130dp"
+            android:layout_height="146dp"
+            android:background="@drawable/border_img_list"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/RoundedSquare" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

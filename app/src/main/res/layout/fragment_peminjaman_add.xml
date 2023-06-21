@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/putih"
+    tools:context=".ui.view.fragment.peminjaman.PeminjamanAddFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ic_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_back_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:fontFamily="@font/plusjakartasans_bold"
+            android:text="@string/add_item_peminjaman"
+            android:textColor="@color/font_color_dark"
+            android:textSize="20sp" />
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolBar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingHorizontal="35dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilNamaBarang"
+                style="@style/TextInputLayoutPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                app:errorIconDrawable="@null"
+                app:hintTextColor="@color/font_color_dark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNamaBarang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/nama_barang"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="#757575" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilKodeBarang"
+                style="@style/TextInputLayoutPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:errorIconDrawable="@null"
+                app:hintTextColor="@color/font_color_dark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilNamaBarang">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etKodeBarang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/kode_barang"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="#757575" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilNamaPeminjam"
+                style="@style/TextInputLayoutPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:errorIconDrawable="@null"
+                app:hintTextColor="@color/font_color_dark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilKodeBarang">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNamaPeminjam"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/nama_peminjam"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="#757575" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilOrganisasiPeminjam"
+                style="@style/TextInputLayoutPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:errorIconDrawable="@null"
+                app:hintTextColor="@color/font_color_dark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilNamaPeminjam">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etOrganisasiPeminjam"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/organisasi_peminjam"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="#757575" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilDeskripsiBarang"
+                style="@style/TextInputLayoutPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:errorIconDrawable="@null"
+                app:hintTextColor="@color/font_color_dark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilOrganisasiPeminjam">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDeskripsiBarang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/deskripsi_barang"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="#757575" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilKondisiAwal"
+                style="@style/TextInputLayoutPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:errorIconDrawable="@null"
+                app:hintTextColor="@color/font_color_dark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilDeskripsiBarang">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etKondisiAwal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/kondisi_awal"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="#757575" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilTanggalPeminjaman"
+                style="@style/TextInputLayoutPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:errorIconDrawable="@null"
+                app:hintTextColor="@color/font_color_dark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilKondisiAwal">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTanggalPeminjaman"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/tanggal_peminjaman"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="#757575" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilTanggalPengembalian"
+                style="@style/TextInputLayoutPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:errorIconDrawable="@null"
+                app:hintTextColor="@color/font_color_dark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilTanggalPeminjaman">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTanggalPengembalian"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/tanggal_pengembalian"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="#757575" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilJumlah"
+                style="@style/TextInputLayoutPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:errorIconDrawable="@null"
+                app:hintTextColor="@color/font_color_dark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilTanggalPengembalian">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etJumlah"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/jumlah"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="#757575" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilJamninan"
+                style="@style/TextInputLayoutPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:errorIconDrawable="@null"
+                app:hintTextColor="@color/font_color_dark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilJumlah">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etJaminan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/jaminan"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="#757575" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilCatatan"
+                style="@style/TextInputLayoutPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:errorIconDrawable="@null"
+                app:hintTextColor="@color/font_color_dark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilJamninan">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCatatan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/catatan"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="#757575" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <LinearLayout
+                android:id="@+id/llPoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/tilCatatan">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/plusjakartasans_regular"
+                    android:text="@string/foto_barang"
+                    android:textColor="@color/font_color_dark"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/ivFoto"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="6dp"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/ic_add_image" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvImages"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/add_image_ll"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/image_layout" />
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/pbAddImage"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:indeterminateTint="@color/font_color_dark"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/btnAddImage"
+                app:layout_constraintEnd_toEndOf="@id/btnAddImage"
+                app:layout_constraintStart_toStartOf="@id/btnAddImage"
+                app:layout_constraintTop_toTopOf="@id/btnAddImage" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnAddImage"
+                android:layout_width="match_parent"
+                android:layout_height="48sp"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/button_round_sec_50"
+                android:fontFamily="@font/plusjakartasans_bold"
+                android:gravity="center"
+                android:text="@string/add_image"
+                android:textAllCaps="false"
+                android:textColor="@color/font_color_dark"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/llPoto" />
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:indeterminateTint="@color/font_color_dark"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/btnSave"
+                app:layout_constraintEnd_toEndOf="@id/btnSave"
+                app:layout_constraintStart_toStartOf="@id/btnSave"
+                app:layout_constraintTop_toTopOf="@id/btnSave" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="48sp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/button_round_prim_60"
+                android:fontFamily="@font/plusjakartasans_bold"
+                android:gravity="center"
+                android:text="@string/save"
+                android:textAllCaps="false"
+                android:textColor="@color/font_color_dark"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/btnAddImage" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnSave" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -45,4 +45,34 @@
     <string name="statusDesk">Tersedia/perlu perbaikan/dipinjam/Hilang/Dalam perbaikan/dipinjam/sedang dipakai/telah dikembalikan/telah dibuang/</string>
     <string name="asal_barang">Asal Barang</string>
     <string name="asalBarangDesk">Hibah/pemberian/hibah/sumbangan/beli</string>
+    <string name="save">Save</string>
+    <string name="jaminan">Jaminan</string>
+    <string name="add_item_peminjaman">Add Item Peminjaman</string>
+    <string name="edit_item_peminjaman">Edit Item Peminjaman</string>
+    <string name="delete">Delete</string>
+    <string name="enter_namaUkm">Masukkan nama UKM!</string>
+    <string name="enter_conPass">Masukkan confirm password!</string>
+    <string name="enter_email">Masukkan email!</string>
+    <string name="invalid_email">Invalid email address!</string>
+    <string name="enter_password">Masukkan password!</string>
+    <string name="invalid_password">Your password must be at least 8 characters</string>
+    <string name="invalid_current_password">Your current password must be at least 8 characters</string>
+    <string name="invalid_new_password">Your new password must be at least 8 characters</string>
+    <string name="invalid_confirm_new_password">Your confirm new password must be at least 8 characters</string>
+    <string name="password_not_match">Different passwords, please enter same password </string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="forgot_pass_desk">After updating your password, check your email</string>
+    <string name="send">Send</string>
+    <string name="profile">Profile</string>
+    <string name="add_image">Add Image</string>
+    <string name="mau_nyari_apa">Mau nyari apa?</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="peminjaman">Peminjaman</string>
+    <string name="inventory">Inventory</string>
+    <string name="add_item_inventory">Add Item Inventory</string>
+    <string name="foto_barang">Foto Barang</string>
+
+
 </resources>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.zexceed.skripsiehapp.ui.view.fragment.HomeFragment"
+        android:label="HomeFragment" />
+
+    <action
+        android:id="@+id/action_PeminjamanFragment_to_PeminjamanDetailFragment"
+        app:destination="@id/peminjamanDetailFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left" />
+
+    <action
+        android:id="@+id/action_PeminjamanFragment_to_PeminjamanSearchFragment"
+        app:destination="@id/peminjamanSearchFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left" />
+    <action
+        android:id="@+id/action_PeminjamanFragment_to_PeminjamanProfileFragment2"
+        app:destination="@id/profileFragment2"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left" />
+    <action
+        android:id="@+id/action_PeminjamanFragment_to_InventoryFragment"
+        app:destination="@id/InventoryFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left" />
+    <action
+        android:id="@+id/action_PeminjamanFragment_to_PeminjamanAddFragment"
+        app:destination="@id/peminjamanAddFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left" />
+    <action
+        android:id="@+id/action_PeminjamanFragment_to_PeminjamanFragment"
+        app:destination="@id/peminjamanFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left" />
+
+    <action
+        android:id="@+id/action_InventoryFragment_to_InventoryAddFragment"
+        app:destination="@id/inventoryAddFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left" />
+
+
+    <action
+        android:id="@+id/action_InventoryFragment_to_InventorySearchFragment"
+        app:destination="@id/inventorySearchFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left" />
+
+
+    <fragment
+        android:id="@+id/peminjamanDetailFragment"
+        android:name="com.zexceed.skripsiehapp.ui.view.fragment.peminjaman.PeminjamanDetailFragment"
+        android:label="fragment__peminjaman_detail"
+        tools:layout="@layout/fragment_peminjaman_detail">
+        <action
+            android:id="@+id/action_PeminjamanDetailFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/peminjamanSearchFragment"
+        android:name="com.zexceed.skripsiehapp.ui.view.fragment.peminjaman.PeminjamanSearchFragment"
+        android:label="fragment__peminjaman_search"
+        tools:layout="@layout/fragment_peminjaman_search">
+        <action
+            android:id="@+id/action_PeminjamanSearchFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_PeminjamanSearchFragment_to_PeminjamanDetailFragment"
+            app:destination="@id/peminjamanDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment2"
+        android:name="com.zexceed.skripsiehapp.ui.view.fragment.auth.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment2_to_editProfileFragment"
+            app:destination="@id/editProfileFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_profileFragment2_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_profileFragment2_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.zexceed.skripsiehapp.ui.view.fragment.auth.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile">
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment2"
+            app:destination="@id/profileFragment2"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/InventoryFragment"
+        android:name="com.zexceed.skripsiehapp.ui.view.fragment.inventory.InventoryFragment"
+        android:label="fragment__inventory"
+        tools:layout="@layout/fragment_inventory">
+        <action
+            android:id="@+id/action_InventoryFragment_to_profileFragment2"
+            app:destination="@id/profileFragment2"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_InventoryFragment_to_inventoryDetailFragment"
+            app:destination="@id/inventoryDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_InventoryFragment_to_inventorySearchFragment"
+            app:destination="@id/inventorySearchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/peminjamanAddFragment"
+        android:name="com.zexceed.skripsiehapp.ui.view.fragment.peminjaman.PeminjamanAddFragment"
+        android:label="fragment__peminjaman_add"
+        tools:layout="@layout/fragment_peminjaman_add">
+        <action
+            android:id="@+id/action_PeminjamanAddFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/peminjamanFragment"
+        android:name="com.zexceed.skripsiehapp.ui.view.fragment.peminjaman.PeminjamanFragment"
+        android:label="fragment__peminjaman"
+        tools:layout="@layout/fragment_peminjaman">
+        <action
+            android:id="@+id/action_PeminjamanFragment_to_PeminjamanSearchFragment2"
+            app:destination="@id/peminjamanSearchFragment" />
+        <action
+            android:id="@+id/action_PeminjamanFragment_to_profileFragment2"
+            app:destination="@id/profileFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/inventoryDetailFragment"
+        android:name="com.zexceed.skripsiehapp.ui.view.fragment.inventory.InventoryDetailFragment"
+        android:label="fragment_inventory_detail"
+        tools:layout="@layout/fragment_inventory_detail">
+        <action
+            android:id="@+id/action_inventoryDetailFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/inventoryAddFragment"
+        android:name="com.zexceed.skripsiehapp.ui.view.fragment.inventory.InventoryAddFragment"
+        android:label="fragment_inventory_add"
+        tools:layout="@layout/fragment_inventory_add">
+        <action
+            android:id="@+id/action_inventoryAddFragment_to_InventoryFragment"
+            app:destination="@id/InventoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/inventorySearchFragment"
+        android:name="com.zexceed.skripsiehapp.ui.view.fragment.inventory.InventorySearchFragment"
+        android:label="fragment_inventory_search"
+        tools:layout="@layout/fragment_inventory_search" >
+        <action
+            android:id="@+id/action_inventorySearchFragment_to_inventoryDetailFragment"
+            app:destination="@id/inventoryDetailFragment" />
+        <action
+            android:id="@+id/action_inventorySearchFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+</navigation>

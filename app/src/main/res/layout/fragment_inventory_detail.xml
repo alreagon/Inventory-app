@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/putih"
+    tools:context=".ui.view.fragment.inventory.InventoryDetailFragment">
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/black"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/llList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-31dp"
+                android:elevation="30dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivItem">
+
+                <!--                Nama Barang-->
+                <LinearLayout
+                    android:layout_width="291dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_detail_item"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="26dp"
+                    android:paddingVertical="18dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_extrabold"
+                        android:text="@string/nama_barang"
+                        android:textColor="@color/font_color_dark"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/tvNamaBarang"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:imeOptions="actionDone"
+                        android:maxLines="1"
+                        android:text="@string/namaBarangDesk"
+                        android:textColor="@color/font_color_dark"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <!--                Kode Barang-->
+                <LinearLayout
+                    android:layout_width="291dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/background_detail_item"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="26dp"
+                    android:paddingVertical="18dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_extrabold"
+                        android:text="@string/kode_barang"
+                        android:textColor="@color/font_color_dark"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/tvKodeBarang"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:imeOptions="actionDone"
+                        android:maxLines="1"
+                        android:text="@string/kodeBarangDesk"
+                        android:textColor="@color/font_color_dark"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <!--                Status-->
+                <LinearLayout
+                    android:layout_width="291dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/background_detail_item"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="26dp"
+                    android:paddingVertical="18dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_extrabold"
+                        android:text="@string/status"
+                        android:textColor="@color/font_color_dark"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/tvStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:imeOptions="actionDone"
+                        android:maxLines="1"
+                        android:text="@string/statusDesk"
+                        android:textColor="@color/font_color_dark"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <!--                Asal Barang-->
+                <LinearLayout
+                    android:layout_width="291dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/background_detail_item"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="26dp"
+                    android:paddingVertical="18dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_extrabold"
+                        android:text="@string/asal_barang"
+                        android:textColor="@color/font_color_dark"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/tvAsalBarang"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:imeOptions="actionDone"
+                        android:maxLines="1"
+                        android:text="@string/asalBarangDesk"
+                        android:textColor="@color/font_color_dark"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <!--                Deskripsi Barang-->
+                <LinearLayout
+                    android:layout_width="291dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/background_detail_item"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="26dp"
+                    android:paddingVertical="18dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_extrabold"
+                        android:text="@string/deskripsi_barang"
+                        android:textColor="@color/font_color_dark"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/tvDeskripsiBarang"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:imeOptions="actionDone"
+                        android:maxLines="1"
+                        android:text="@string/deskripsiBarangDesk"
+                        android:textColor="@color/font_color_dark"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <!--                Catatan-->
+                <LinearLayout
+                    android:layout_width="291dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/background_detail_item"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="26dp"
+                    android:paddingVertical="18dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_extrabold"
+                        android:text="@string/catatan"
+                        android:textColor="@color/font_color_dark"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/tvCatatan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:imeOptions="actionDone"
+                        android:text="@string/catatanDesk"
+                        android:textColor="@color/font_color_dark"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="46dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <Button
+                            android:id="@+id/btnEdit"
+                            style="@style/Widget.Material3.Button.Icon"
+                            android:layout_width="110dp"
+                            android:layout_height="50dp"
+                            android:fontFamily="@font/plusjakartasans_medium"
+                            android:text="@string/edit"
+                            android:textColor="@color/font_color_dark"
+                            android:textSize="14sp"
+                            app:icon="@drawable/ic_edit"
+                            app:iconTint="@null"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/btnSave"
+                            style="@style/Widget.Material3.Button.Icon"
+                            android:layout_width="110dp"
+                            android:layout_height="50dp"
+                            android:fontFamily="@font/plusjakartasans_medium"
+                            android:text="@string/save"
+                            android:textColor="@color/font_color_dark"
+                            android:textSize="14sp"
+                            android:visibility="invisible"
+                            app:icon="@drawable/ic_check_24"
+                            app:iconTint="@color/font_color_dark"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/btnEmpty"
+                            style="@style/Widget.Material3.Button.Icon"
+                            android:layout_width="110dp"
+                            android:layout_height="50dp"
+                            android:fontFamily="@font/plusjakartasans_medium"
+                            android:textColor="@color/font_color_dark"
+                            android:textSize="14sp"
+                            android:visibility="invisible"
+                            app:iconTint="@null"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ProgressBar
+                            android:id="@+id/pbBtnSaveEdit"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:indeterminateTint="@color/font_color_dark"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="26dp">
+
+                        <Button
+                            android:id="@+id/btnHapus"
+                            style="@style/Widget.Material3.Button.Icon"
+                            android:layout_width="110dp"
+                            android:layout_height="50dp"
+                            android:backgroundTint="@color/danger_color_50"
+                            android:fontFamily="@font/plusjakartasans_medium"
+                            android:text="@string/hapus"
+                            android:textColor="@color/font_color_dark"
+                            android:textSize="14sp"
+                            app:icon="@drawable/ic_cross"
+                            app:iconTint="@null"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/btnHapusEmpty"
+                            style="@style/Widget.Material3.Button.Icon"
+                            android:layout_width="110dp"
+                            android:layout_height="50dp"
+                            android:backgroundTint="@color/danger_color_50"
+                            android:fontFamily="@font/plusjakartasans_medium"
+                            android:textColor="@color/font_color_dark"
+                            android:visibility="invisible"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ProgressBar
+                            android:id="@+id/pbBtnDelete"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:indeterminateTint="@color/font_color_dark"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/ivItem"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:elevation="12dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/sapu"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/icBack"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="28dp"
+                android:elevation="12dp"
+                android:src="@drawable/ic_back_bulet"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
