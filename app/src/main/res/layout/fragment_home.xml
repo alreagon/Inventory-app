@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolBar"
             android:layout_width="match_parent"
@@ -25,10 +24,10 @@
             app:layout_scrollFlags="scroll|enterAlways">
 
             <ImageView
-                android:layout_marginTop="40dp"
                 android:layout_width="120dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
                 android:src="@drawable/logo_nyimpen" />
 
         </androidx.appcompat.widget.Toolbar>
@@ -37,18 +36,16 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/toolBar"
             android:background="@color/putih"
             app:tabIndicatorColor="@color/primary_color_60"
+            app:tabIndicatorFullWidth="false"
             app:tabIndicatorHeight="3dp"
+            android:elevation="-50dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:tabMode="fixed"
             app:tabSelectedTextColor="@color/primary_color_60"
             app:tabTextColor="@color/font_color_dark" />
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@drawable/toolbar_dropshadow" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -56,10 +53,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
+        android:elevation="30dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager"
+            android:elevation="30dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

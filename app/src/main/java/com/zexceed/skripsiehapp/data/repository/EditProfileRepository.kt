@@ -18,7 +18,6 @@ class EditProfileRepository {
     private val _currentUserLiveData = MutableLiveData<FirebaseUser>()
     val currentUserLiveData: LiveData<FirebaseUser> = _currentUserLiveData
 
-
     init {
         _currentUserLiveData.value = auth.currentUser
     }
@@ -40,6 +39,7 @@ class EditProfileRepository {
             currentPasssword
         )
         user!!.apply {
+            //change password
             reauthenticate(credential)
                 .addOnSuccessListener {
                     user.updatePassword(newPassword).addOnCompleteListener { task ->
@@ -67,14 +67,15 @@ class EditProfileRepository {
                                 if (mTask.isSuccessful) {
                                     Log.d(ContentValues.TAG, "User email address updated.")
                                     val mCurrentUser = auth.currentUser
-                                    val user = User(
+                                    val userUkm = User(
                                         mCurrentUser!!.uid,
-                                        mCurrentUser.displayName!!
+                                        mCurrentUser.displayName!!,
+                                        mCurrentUser.email!!
                                     )
                                     statusLiveData.postValue("SUCCESS")
                                     database.collection("user")
-                                        .document(user.id)
-                                        .update("namaUkm", user.namaUkm)
+                                        .document(userUkm.id)
+                                        .update("namaUkm", userUkm.namaUkm, "email", userUkm.email)
                                         .addOnSuccessListener {
                                             _currentUserLiveData.postValue(auth.currentUser)
                                         }.addOnFailureListener {
@@ -100,86 +101,6 @@ class EditProfileRepository {
         return statusLiveData
     }
 
-
-//    suspend fun changeEmailAndName(email: String, name: String): MutableLiveData<String> {
-//        val user = auth.currentUser
-//        val statusLiveData = MutableLiveData<String>()
-//        statusLiveData.postValue("LOADING")
-//        val profileUpdates = userProfileChangeRequest {
-//            displayName = name
-//        }
-//        user!!.apply {
-//            updateEmail(email)
-//                .addOnCompleteListener { task ->
-//                    if (task.isSuccessful) {
-//                        Log.d(ContentValues.TAG, "User email address updated.")
-//                        updateProfile(profileUpdates)
-//                            .addOnCompleteListener { mTask ->
-//                                if (mTask.isSuccessful) {
-//                                    Log.d(ContentValues.TAG, "User email address updated.")
-//                                    val mCurrentUser = auth.currentUser
-//                                    val user = User(
-//                                        mCurrentUser!!.uid,
-//                                        mCurrentUser.displayName!!
-//                                    )
-//                                    statusLiveData.postValue("SUCCESS")
-//                                    database.collection("user")
-//                                        .document(user.id)
-//                                        .update("namaUkm", user.namaUkm)
-//                                        .addOnSuccessListener {
-//                                            _currentUserLiveData.postValue(auth.currentUser)
-//                                        }.addOnFailureListener {
-//                                            Log.d("TEZZ", "Error : $it")
-//                                            statusLiveData.postValue("$it")
-//                                            _currentUserLiveData.postValue(auth.currentUser)
-//                                        }
-//                                }
-//                            }.addOnFailureListener {
-//                                Log.d("TEZZ", "Error : $it")
-//                                statusLiveData.postValue("$it")
-//                                _currentUserLiveData.postValue(auth.currentUser)
-//                            }
-//                    }
-//                }.addOnFailureListener {
-//                    Log.d("TEZZ", "Error : $it")
-//                    statusLiveData.postValue("$it")
-//                    _currentUserLiveData.postValue(auth.currentUser)
-//                }
-//
-//        }
-//
-//
-//        return statusLiveData
-//    }
-//
-//    suspend fun changePassword(currentPasssword: String, newPassword: String): MutableLiveData<String> {
-//        val user = auth.currentUser
-//        val statusLiveData = MutableLiveData<String>()
-//        statusLiveData.postValue("LOADING")
-//        val credential = EmailAuthProvider.getCredential(
-//            user?.email.toString(),
-//            currentPasssword
-//        )
-//
-//        user?.reauthenticate(credential)
-//            ?.addOnSuccessListener {
-//                user.updatePassword(newPassword).addOnCompleteListener { task ->
-//                    if (task.isSuccessful) {
-//                        _currentUserLiveData.value = auth.currentUser
-//
-//                        Log.w(ContentValues.TAG, task.toString())
-//                        statusLiveData.postValue("SUCCESS")
-//                    } else {
-//                        Log.w(ContentValues.TAG, task.exception)
-//                        statusLiveData.postValue("$it")
-//                    }
-//                }
-//            }?.addOnFailureListener {
-//                Log.w(ContentValues.TAG, it)
-//                statusLiveData.postValue("$it")
-//            }
-//        return statusLiveData
-//    }
 
     companion object {
         @Volatile

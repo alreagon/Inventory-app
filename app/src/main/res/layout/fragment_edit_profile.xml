@@ -63,7 +63,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
+                    android:layout_marginStart="12dp"
                     android:layout_marginTop="29dp"
                     android:src="@drawable/ic_profile_bulet" />
 
@@ -227,21 +227,10 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
 
-                <ProgressBar
-                    android:id="@+id/progress_bar"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:indeterminateTint="@color/font_color_dark"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toBottomOf="@id/btnSave"
-                    app:layout_constraintEnd_toEndOf="@id/btnSave"
-                    app:layout_constraintStart_toStartOf="@id/btnSave"
-                    app:layout_constraintTop_toTopOf="@id/btnSave" />
-
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:id="@+id/btnSave"
                     android:layout_width="match_parent"
-                    android:layout_height="48sp"
+                    android:layout_height="48dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="30dp"
                     android:background="@drawable/button_round_prim_60"
@@ -253,11 +242,21 @@
                     android:textSize="14sp"
                     app:layout_constraintTop_toBottomOf="@id/tilConfirmNewPassword" />
 
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:indeterminateTint="@color/font_color_dark"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@id/btnSave"
+                    app:layout_constraintEnd_toEndOf="@id/btnSave"
+                    app:layout_constraintStart_toStartOf="@id/btnSave"
+                    app:layout_constraintTop_toTopOf="@id/btnSave" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="500dp" />
+                android:layout_height="200dp" />
         </LinearLayout>
 
     </ScrollView>

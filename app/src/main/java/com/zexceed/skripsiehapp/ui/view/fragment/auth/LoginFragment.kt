@@ -48,10 +48,6 @@ class LoginFragment : Fragment() {
             }
         }
 
-        binding.tvForgotPass.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
-        }
-
         binding.tvToregister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
@@ -125,3 +121,20 @@ class LoginFragment : Fragment() {
     }
 
 }
+
+
+//        binding.tvForgotPass.setOnClickListener {
+//            findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
+//        }
+
+//        <TextView
+//        android:id="@+id/tvForgotPass"
+//        android:layout_width="wrap_content"
+//        android:layout_height="wrap_content"
+//        android:layout_gravity="end"
+//        android:layout_marginStart="3dp"
+//        android:layout_marginTop="16dp"
+//        android:fontFamily="@font/plusjakartasans_bold"
+//        android:text="Forgot Password?"
+//        android:textColor="@color/font_color_dark"
+//        android:textSize="14sp" />

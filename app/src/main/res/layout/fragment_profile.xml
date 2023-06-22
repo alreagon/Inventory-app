@@ -51,7 +51,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="29dp"
             android:src="@drawable/ic_profile_bulet" />
 
@@ -73,7 +73,7 @@
             android:layout_marginTop="6dp"
             android:fontFamily="@font/plusjakartasans_regular"
             android:gravity="center"
-            android:text="@string/organisasiExampleDesk"
+            android:text="@string/email_desk"
             android:textColor="@color/font_color_dark"
             android:textSize="11sp" />
 
@@ -90,11 +90,12 @@
         app:layout_constraintTop_toBottomOf="@id/llBorderProfile">
 
 
+        <!--        Edit Profile Linear Layout-->
         <LinearLayout
             android:id="@+id/llEditProfile"
             android:layout_width="150dp"
             android:layout_height="190dp"
-            android:layout_marginEnd="26dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/header_profile"
             android:backgroundTint="@color/secondary_color_50"
             android:gravity="center_horizontal"
@@ -106,7 +107,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="11dp"
                 android:layout_marginTop="30dp"
                 android:src="@drawable/ic_edit_bulet" />
 
@@ -116,12 +117,13 @@
                 android:layout_marginTop="-6dp"
                 android:fontFamily="@font/plusjakartasans_bold"
                 android:gravity="center"
-                android:text="Edit Profile"
+                android:text="@string/edit_profile"
                 android:textColor="@color/font_color_dark"
                 android:textSize="14sp" />
 
         </LinearLayout>
 
+        <!--        Logout Linear Layout-->
         <LinearLayout
             android:id="@+id/llLogoutProfile"
             android:layout_width="150dp"
@@ -137,7 +139,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="11dp"
                 android:layout_marginTop="30dp"
                 android:src="@drawable/ic_logout_bulet" />
 
@@ -147,7 +149,7 @@
                 android:layout_marginTop="-6dp"
                 android:fontFamily="@font/plusjakartasans_bold"
                 android:gravity="center"
-                android:text="Logout"
+                android:text="@string/title_logout"
                 android:textColor="@color/font_color_dark"
                 android:textSize="14sp" />
 

@@ -47,13 +47,13 @@
         app:destination="@id/inventoryAddFragment"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left" />
-    
+
     <action
         android:id="@+id/action_InventoryFragment_to_InventoryDetailFragment"
         app:destination="@id/inventoryDetailFragment"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left" />
-    
+
     <action
         android:id="@+id/action_InventoryFragment_to_InventorySearchFragment"
         app:destination="@id/inventorySearchFragment"
@@ -168,16 +168,16 @@
         android:label="fragment_inventory_add"
         tools:layout="@layout/fragment_inventory_add">
         <action
-            android:id="@+id/action_inventoryAddFragment_to_homeFragment"
+            android:id="@+id/action_inventoryAddFragment_to_InventoryFragment"
+            app:destination="@id/InventoryFragment"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:destination="@id/homeFragment" />
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/inventorySearchFragment"
         android:name="com.zexceed.skripsiehapp.ui.view.fragment.inventory.InventorySearchFragment"
         android:label="fragment_inventory_search"
-        tools:layout="@layout/fragment_inventory_search" >
+        tools:layout="@layout/fragment_inventory_search">
         <action
             android:id="@+id/action_inventorySearchFragment_to_inventoryDetailFragment"
             app:destination="@id/inventoryDetailFragment" />

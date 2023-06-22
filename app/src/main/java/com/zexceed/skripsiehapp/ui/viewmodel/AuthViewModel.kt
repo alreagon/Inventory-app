@@ -5,13 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.zexceed.skripsiehapp.data.model.User
 import com.zexceed.skripsiehapp.data.repository.AuthRepository
+import com.zexceed.skripsiehapp.data.repository.EditProfileRepository
 import com.zexceed.skripsiehapp.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    val repository: AuthRepository
+    val repository: AuthRepository,
 ) : ViewModel() {
 
     private val _register = MutableLiveData<UiState<String>>()
@@ -26,9 +27,18 @@ class AuthViewModel @Inject constructor(
     val forgotPassword: LiveData<UiState<String>>
         get() = _forgotPassword
 
-    private val _editUser = MutableLiveData<UiState<String>>()
-    val editUser: LiveData<UiState<String>>
-        get() = _editUser
+    private val _updateUserInfo = MutableLiveData<UiState<String>>()
+    val updateUserInfo: LiveData<UiState<String>>
+        get() = _updateUserInfo
+
+    fun updateUserInfo(
+        user : User
+    ) {
+        _updateUserInfo.value = UiState.Loading
+        repository.updateUserInfo(
+            user = user
+        ) { _updateUserInfo.value = it }
+    }
 
     fun register(
         email: String,
@@ -64,11 +74,11 @@ class AuthViewModel @Inject constructor(
         }
     }
 
-    fun logout(result: () -> Unit){
+    fun logout(result: () -> Unit) {
         repository.logout(result)
     }
 
-    fun getSession(result: (User?) -> Unit){
+    fun getSession(result: (User?) -> Unit) {
         repository.getSession(result)
     }
 }

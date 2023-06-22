@@ -7,11 +7,10 @@
     android:background="@color/putih"
     tools:context=".ui.view.fragment.SplashScreenFragment">
 
-
     <ImageView
         android:id="@+id/ivLogoSplashScreen"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:src="@drawable/logo_nyimpen_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

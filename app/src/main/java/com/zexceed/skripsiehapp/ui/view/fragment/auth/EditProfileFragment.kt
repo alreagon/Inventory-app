@@ -3,12 +3,16 @@ package com.zexceed.skripsiehapp.ui.view.fragment.auth
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentOnAttachListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.zexceed.skripsiehapp.R
 import com.zexceed.skripsiehapp.data.model.User
@@ -19,9 +23,11 @@ import com.zexceed.skripsiehapp.util.isValidEmail
 import com.zexceed.skripsiehapp.util.show
 import com.zexceed.skripsiehapp.util.toast
 import com.zexceed.skripsiehapp.databinding.FragmentEditProfileBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class EditProfileFragment : Fragment() {
     val TAG: String = "EditProfileFragment"
     private var _binding: FragmentEditProfileBinding? = null
@@ -50,8 +56,8 @@ class EditProfileFragment : Fragment() {
                 tvNamaUkm.setText("")
             }
             val currentUser = editProfileViewModel.currentUserLiveData.value
-//            etUkmName.setText(currentUser?.displayName)
-//            tvNamaUkm.setText(currentUser?.displayName)
+            etUkmName.setText(currentUser?.displayName)
+            tvNamaUkm.setText(currentUser?.displayName)
             etEmail.setText(currentUser?.email)
             btnSave.setOnClickListener {
                 val name = etUkmName.text.toString()
@@ -65,7 +71,7 @@ class EditProfileFragment : Fragment() {
                     if (!email.isValidEmail()) {
                         toast("Email tidak benar")
                     } else if (newPassword != confirmNewPassword) {
-                        toast("Password and confirm password do not match")
+                        toast("Password confirmation mismatch")
                     } else if (binding.etCurrentPassword.text.toString().length < 8) {
                         toast(getString(R.string.invalid_current_password))
                     } else if (binding.etNewPassword.text.toString().length < 8) {
@@ -73,14 +79,14 @@ class EditProfileFragment : Fragment() {
                     } else if (binding.etConfirmNewPassword.text.toString().length < 8) {
                         toast(getString(R.string.invalid_confirm_new_password))
                     } else {
-                        lifecycleScope.launch(Dispatchers.IO) {
+//                        lifecycleScope.launch(Dispatchers.IO) {
+                        lifecycleScope.launch(Dispatchers.Main) {
                             val message = editProfileViewModel.changeProfile(
                                 email,
                                 name,
                                 currentPassword,
                                 newPassword
                             )
-                            lifecycleScope.launch(Dispatchers.Main) {
                                 message.observe(viewLifecycleOwner) {
                                     when (it) {
                                         "SUCCESS" -> {
@@ -93,20 +99,22 @@ class EditProfileFragment : Fragment() {
                                         }
 
                                         "LOADING" -> {
-                                            btnSave.setText("Saved!")
                                             progressBar.show()
-
+                                            btnSave.setText("")
                                         }
 
                                         else -> {
-                                            toast("Update data success")
+//                                            toast("Update data success")
                                             btnSave.setText("Saved!")
-                                            progressBar.show()
+//                                            toast("Incorrect current password!")
+//                                            btnSave.setText("Error!")
+                                            progressBar.hide()
+                                            onStop()
                                         }
                                     }
                                 }
                             }
-                        }
+//                        }
                     }
                 }
             }
@@ -114,6 +122,21 @@ class EditProfileFragment : Fragment() {
             icBackEditProfile.setOnClickListener {
                 findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment)
             }
+        }
+
+    }
+
+    private fun btnSave() {
+        for (i in 1 downTo 0) {
+            binding.btnSave.performClick()
+        }
+    }
+
+    fun NavController.safeNavigate(direction: NavDirections) {
+        Log.d(TAG, "Click happened")
+        currentDestination?.getAction(direction.actionId)?.run {
+            Log.d(TAG, "Click Propagated")
+            navigate(direction)
         }
     }
 }

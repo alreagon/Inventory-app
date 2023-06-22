@@ -1,18 +1,31 @@
 package com.zexceed.skripsiehapp.ui.view.fragment.auth
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.zexceed.skripsiehapp.R
 import com.zexceed.skripsiehapp.data.model.User
 import com.zexceed.skripsiehapp.ui.viewmodel.AuthViewModel
 import com.zexceed.skripsiehapp.databinding.FragmentProfileBinding
+import com.zexceed.skripsiehapp.ui.viewmodel.EditProfileViewModel
+import com.zexceed.skripsiehapp.util.UiState
+import com.zexceed.skripsiehapp.util.hide
+import com.zexceed.skripsiehapp.util.show
+import com.zexceed.skripsiehapp.util.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,6 +37,7 @@ class ProfileFragment : Fragment() {
     private val authViewModel: AuthViewModel by viewModels()
     private lateinit var myDialog: Dialog
     var objUser: User? = null
+    private val editProfileViewModel: EditProfileViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,17 +58,64 @@ class ProfileFragment : Fragment() {
                     })
             }
 
+            val currentUser = editProfileViewModel.currentUserLiveData.value
+            namaUkmProfile.setText(currentUser?.displayName)
+            emailUkmProfile.setText(currentUser?.email)
+
             llLogoutProfile.setOnClickListener {
-//                showDialog()
-                authViewModel.logout {
-                    findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
-                }
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(resources.getString(R.string.title_logout))
+                    .setMessage(resources.getString(R.string.content_logout))
+                    .setNegativeButton(resources.getString(R.string.btn_cancel)) { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .setPositiveButton(resources.getString(R.string.btn_logout)) { _, _ ->
+                        authViewModel.logout {
+                            findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
+                        }
+                    }
+                    .show()
             }
+//            llLogoutProfile.setOnClickListener {
+////                showDialog()
+//                authViewModel.logout {
+//                    findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
+//                }
+//            }
             icBackProfile.setOnClickListener {
                 findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
             }
 
         }
+    }
+
+//    fun observer() {
+//        val userId = Firebase.auth.currentUser!!.
+//        authViewModel.updateUserInfo.observe(this) { state ->
+//            when (state) {
+//                is UiState.Loading -> {
+//                }
+//
+//                is UiState.Failure -> {
+//                    toast(state.error)
+//                }
+//
+//                is UiState.Success -> {
+//                    setUpForView(state.data)
+//                    Handler(Looper.getMainLooper()).postDelayed({
+//                        findNavController().navigate(R.id.action_registerFragment_to_homeNavigation)
+//                    }, 1500)
+//                }
+//            }
+//        }
+//    }
+
+    private fun setUpForView(data: User) {
+        with(binding) {
+            namaUkmProfile.setText(data.namaUkm)
+            emailUkmProfile.setText(data.namaUkm)
+        }
+
     }
 
     private fun showDialog() {

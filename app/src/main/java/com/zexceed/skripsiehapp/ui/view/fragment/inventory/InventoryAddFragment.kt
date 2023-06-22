@@ -54,16 +54,16 @@ class InventoryAddFragment : Fragment(R.layout.fragment_inventory_add) {
             if (resultCode == Activity.RESULT_OK) {
                 val fileUri = data?.data!!
                 imageUris.add(fileUri)
-//                imageUris = fileUri
                 adapter.updateList(imageUris)
                 binding.ivFoto.setImageURI(fileUri)
-//                binding.ivFoto.hide()
                 binding.pbAddImage.hide()
+                binding.btnAddImage.setText("Image ready!")
             } else if (resultCode == ImagePicker.RESULT_ERROR) {
                 binding.pbAddImage.hide()
+                binding.btnAddImage.setText("Error!")
                 toast(ImagePicker.getError(data))
             } else {
-                binding.pbAddImage.hide()
+                binding.pbAddImage.show()
                 Log.e("TAG", "Task Cancelled")
             }
         }
@@ -81,34 +81,35 @@ class InventoryAddFragment : Fragment(R.layout.fragment_inventory_add) {
         updateUI()
         observer()
         binding.icBack.setOnClickListener {
-            findNavController().navigate(R.id.action_inventoryAddFragment_to_homeFragment)
+            findNavController().navigate(R.id.action_inventoryAddFragment_to_InventoryFragment)
         }
 
     }
 
     private fun observer() {
+        binding.apply {
+            inventoryViewModel.addInventory.observe(viewLifecycleOwner) { state ->
+                when (state) {
+                    is UiState.Loading -> {
+                        progressBar.show()
+                        btnSave.text = ""
+                    }
 
-        inventoryViewModel.addInventory.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                is UiState.Loading -> {
-                    binding.progressBar.show()
-                    binding.btnSave.text = ""
-                }
+                    is UiState.Failure -> {
+                        progressBar.hide()
+                        btnSave.text = "ERROR"
+                        toast(state.error)
+                    }
 
-                is UiState.Failure -> {
-                    binding.progressBar.hide()
-                    binding.btnSave.text = "ERROR"
-                    toast(state.error)
-                }
-
-                is UiState.Success -> {
-                    binding.progressBar.hide()
-                    binding.btnSave.text = "Saved!"
-                    toast(state.data.second)
-                    objInventory = state.data.first
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        findNavController().navigateUp()
-                    }, 1500)
+                    is UiState.Success -> {
+                        progressBar.hide()
+                        btnSave.text = "Saved!"
+                        toast(state.data.second)
+                        objInventory = state.data.first
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            findNavController().navigateUp()
+                        }, 1500)
+                    }
                 }
             }
         }
@@ -135,6 +136,7 @@ class InventoryAddFragment : Fragment(R.layout.fragment_inventory_add) {
         }
         binding.btnAddImage.setOnClickListener {
             binding.pbAddImage.show()
+            binding.btnAddImage.setText("")
             ImagePicker.with(this)
                 .crop()
                 .compress(1024)
@@ -153,21 +155,24 @@ class InventoryAddFragment : Fragment(R.layout.fragment_inventory_add) {
                     when (state) {
                         is UiState.Loading -> {
                             progressBar.show()
+                            btnSave.setText("")
                         }
 
                         is UiState.Failure -> {
                             progressBar.hide()
+                            btnSave.setText("Error!")
                             toast(state.error)
                         }
 
                         is UiState.Success -> {
                             progressBar.hide()
+                            btnSave.setText("Data Saved!")
                             inventoryViewModel.addInventory(getInventory())
                         }
                     }
                 }
             } else {
-                inventoryViewModel.addInventory(getInventory())
+                btnAddImage.setText("Please input image!")
             }
         }
     }

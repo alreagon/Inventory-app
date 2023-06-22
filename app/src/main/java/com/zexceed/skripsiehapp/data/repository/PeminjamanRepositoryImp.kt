@@ -142,7 +142,8 @@ class PeminjamanRepositoryImp(
     override suspend fun uploadSingleFile(fileUri: Uri, onResult: (UiState<Uri>) -> Unit) {
         try {
             val uri: Uri = withContext(Dispatchers.IO) {
-                storageReference
+                storageReference.child(PEMINJAMAN_IMAGES)
+                    .child("${System.currentTimeMillis()}")
                     .putFile(fileUri)
                     .await()
                     .storage

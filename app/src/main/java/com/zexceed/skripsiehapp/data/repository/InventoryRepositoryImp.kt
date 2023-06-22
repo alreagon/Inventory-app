@@ -6,6 +6,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.StorageReference
 import com.zexceed.skripsiehapp.data.model.Inventory
 import com.zexceed.skripsiehapp.util.FireStoreCollection
+import com.zexceed.skripsiehapp.util.FirebaseStorageConstants
 import com.zexceed.skripsiehapp.util.FirebaseStorageConstants.INVENTORY_IMAGES
 import com.zexceed.skripsiehapp.util.UiState
 import kotlinx.coroutines.Dispatchers
@@ -142,7 +143,8 @@ class InventoryRepositoryImp(
     override suspend fun uploadSingleFile(fileUri: Uri, onResult: (UiState<Uri>) -> Unit) {
         try {
             val uri: Uri = withContext(Dispatchers.IO) {
-                storageReference
+                storageReference.child(INVENTORY_IMAGES)
+                    .child("${System.currentTimeMillis()}")
                     .putFile(fileUri)
                     .await()
                     .storage

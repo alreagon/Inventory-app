@@ -3,6 +3,7 @@ package com.zexceed.skripsiehapp.data.repository
 import android.content.ContentValues.TAG
 import android.content.SharedPreferences
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
@@ -22,16 +23,47 @@ class AuthRepositoryImp(
     private val gson: Gson
 ) : AuthRepository {
 
+    //    private val _currentUserLiveData = MutableLiveData<FirebaseUser>()
+//    val currentUserLiveData: LiveData<FirebaseUser> = _currentUserLiveData
     override fun registerUser(
         email: String,
         password: String,
         user: User, result: (UiState<String>) -> Unit
     ) {
-        userProfileChangeRequest {
-            displayName = user.namaUkm
-        }
+        val message = MutableLiveData<String>()
+        message.postValue("LOADING")
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
+                val currentUser = auth.currentUser
+                val userNameNow = user.namaUkm
+                val emailNow = user.email
+                val profileUpdates = userProfileChangeRequest {
+                    displayName = userNameNow
+                }
+                currentUser!!.updateProfile(profileUpdates)
+                    .addOnCompleteListener { mTask ->
+                        if (mTask.isSuccessful) {
+                            Log.d(TAG, "User profile updated.")
+                            val mCurrentUser = auth.currentUser
+                            val mahasiswaKos = User(
+                                mCurrentUser!!.uid,
+                                mCurrentUser.displayName!!,
+                                mCurrentUser.email!!
+                            )
+                            database.collection("user")
+                                .document(mahasiswaKos.id)
+                                .set(mahasiswaKos)
+                                .addOnSuccessListener {
+//                                    _currentUserLiveData.postValue(auth.currentUser)
+//                                    message.postValue("SUCCESS")
+                                }
+                        } else {
+                            Log.w(TAG, "signInWithEmail:failure", it.exception)
+                            message.postValue(it.exception.toString())
+                        }
+                    }
+                    .addOnFailureListener {
+                    }
                 if (it.isSuccessful) {
                     user.id = it.result.user?.uid ?: ""
                     updateUserInfo(user) { state ->
@@ -167,6 +199,11 @@ class AuthRepositoryImp(
             result.invoke(user)
             Log.d(TAG, "getSession tidak null")
         }
+    }
+
+    override fun getUserId(id: String, result: (UiState<User>) -> Unit) {
+
+
     }
 
 }

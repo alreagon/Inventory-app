@@ -17,5 +17,5 @@ interface AuthRepository {
     fun logout(result: () -> Unit)
     fun storeSession(id: String, result: (User?) -> Unit)
     fun getSession(result: (User?) -> Unit)
-
+    fun getUserId(id: String, result: (UiState<User>) -> Unit)
 }

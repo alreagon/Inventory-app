@@ -74,5 +74,11 @@
     <string name="add_item_inventory">Add Item Inventory</string>
     <string name="foto_barang">Foto Barang</string>
 
+    <string name="title_logout">Logout</string>
+    <string name="content_logout">Are you sure you want to log out?</string>
+    <string name="btn_cancel">No</string>
+    <string name="btn_logout">Yes</string>
+    <string name="email_desk">BEMFilkomUB@gmail.com</string>
+
 
 </resources>
