@@ -13,18 +13,9 @@ import java.io.File
 
 class InventorySearchAdapter(
     val onItemClicked: (Int, Inventory) -> Unit,
-//    mList: List<Inventory>
 ) : RecyclerView.Adapter<InventorySearchAdapter.MyViewHolder>() {
 
     private var list: MutableList<Inventory> = arrayListOf()
-    private lateinit var suggestions: List<String>
-//    private val mList: List<Inventory>
-
-//    init {
-//        this.mList = mList
-//    }
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView =
             ItemListInventoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -42,14 +33,6 @@ class InventorySearchAdapter(
         notifyDataSetChanged()
     }
 
-    fun setList(suggestionList: List<String>) {
-        suggestions = suggestionList
-        notifyDataSetChanged()
-    }
-
-//    override fun getItemCount(): Int {
-//        return mList.size
-//    }
     override fun getItemCount(): Int {
         return list.size
     }
@@ -61,19 +44,6 @@ class InventorySearchAdapter(
                 tvItemName.text = item.namaBarang
                 tvKodeBarang.text = item.kodeBarang
                 tvStatus.text = item.status
-//                Picasso.get().load(item.foto).into(ivList)
-//                Glide.with(ivList.context).load(item.foto).into(ivList)
-
-                val folder = Environment.getExternalStorageDirectory().path
-                val files = folder
-                Log.d("Your Tag", "onCreate: ${folder}")
-                Log.d("Your Tag", "onCreate: Your files are ${files}")
-
-//                val uri = Uri.parse(item.foto[0])
-//                val pdf = File(uri.path!!)
-//                ivList.setImageBitmap(pdf)
-
-                val imgFile = File(item.foto[0])
                 val imgFileeee = item.foto[0].replace("file://", "")
 
                 val imgBitmap = BitmapFactory.decodeFile(imgFileeee)

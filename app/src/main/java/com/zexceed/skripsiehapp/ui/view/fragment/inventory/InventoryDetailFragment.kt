@@ -22,6 +22,7 @@ import com.zexceed.skripsiehapp.util.hide
 import com.zexceed.skripsiehapp.util.show
 import com.zexceed.skripsiehapp.util.toast
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
 
 @AndroidEntryPoint
 class InventoryDetailFragment : Fragment() {
@@ -124,9 +125,19 @@ class InventoryDetailFragment : Fragment() {
                 tvAsalBarang.setText(data.asalBarang)
                 tvDeskripsiBarang.setText(data.deskripsiBarang)
                 tvCatatan.setText(data.catatan)
-                val imgFileeee = data.foto[0].replace("file://", "")
-                val imgBitmap = BitmapFactory.decodeFile(imgFileeee)
-                ivItem.setImageBitmap(imgBitmap)
+                val foto = data.foto[0].replace("file://", "")
+                if (isValidLocalUrl(foto)) {
+                    val imgBitmap = BitmapFactory.decodeFile(foto)
+                    if (imgBitmap != null) {
+                        ivItem.setImageBitmap(imgBitmap)
+                    } else {
+                        // Gambar tidak valid, tampilkan gambar acak dari drawable
+                        ivItem.setImageResource(getRandomDrawable())
+                    }
+                } else {
+                    // URL tidak valid, tampilkan gambar acak dari drawable
+                    ivItem.setImageResource(getRandomDrawable())
+                }
                 isMakeEnableUI(false)
                 btnSave.hide()
                 btnEdit.show()
@@ -143,6 +154,24 @@ class InventoryDetailFragment : Fragment() {
             }
             buttonSetup()
         }
+    }
+
+    private fun isValidLocalUrl(url: String): Boolean {
+        val file = File(url.replace("file://", ""))
+        return file.exists() && file.isFile
+    }
+
+    private fun getRandomDrawable(): Int {
+        val drawableList = listOf(
+            R.drawable.sapu,
+            R.drawable.gambar_atk,
+            R.drawable.gambar_basket,
+            R.drawable.gambar_kursi,
+            R.drawable.gambar_printer,
+            R.drawable.gambar_proyektor,
+            R.drawable.gambar_speaker
+        )
+        return drawableList.random()
     }
 
     private fun buttonSetup() {

@@ -29,7 +29,7 @@ class PeminjamanSearchFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: PeminjamanViewModel by viewModels()
     val adapterSearch by lazy {
-        PeminjamanSearchAdapter(
+        PeminjamanAdapter(
             onItemClicked = { pos, item ->
                 findNavController().navigate(
                     R.id.action_PeminjamanSearchFragment_to_PeminjamanDetailFragment,

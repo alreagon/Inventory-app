@@ -1,5 +1,6 @@
 package com.zexceed.skripsiehapp.ui.view.fragment.inventory
 
+import InventoryAdapter
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zexceed.skripsiehapp.R
 import com.zexceed.skripsiehapp.databinding.FragmentInventorySearchBinding
-import com.zexceed.skripsiehapp.ui.adapter.InventoryAdapter
 import com.zexceed.skripsiehapp.ui.adapter.InventorySearchAdapter
 import com.zexceed.skripsiehapp.ui.viewmodel.InventoryViewModel
 import com.zexceed.skripsiehapp.util.UiState
@@ -29,7 +29,7 @@ class InventorySearchFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: InventoryViewModel by viewModels()
     val adapterSearch by lazy {
-        InventorySearchAdapter(
+        InventoryAdapter(
             onItemClicked = { pos, item ->
                 findNavController().navigate(
                     R.id.action_inventorySearchFragment_to_inventoryDetailFragment,

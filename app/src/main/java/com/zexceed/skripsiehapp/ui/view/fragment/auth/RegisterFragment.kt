@@ -84,7 +84,7 @@ class RegisterFragment : Fragment() {
                 }
 
                 is UiState.Failure -> {
-                    binding.btnRegister.setText("Create Account")
+                    binding.btnRegister.setText("Register Error!")
                     binding.pbRegister.hide()
                     toast(state.error)
                 }
@@ -94,7 +94,7 @@ class RegisterFragment : Fragment() {
                     binding.pbRegister.hide()
                     toast(state.data)
                     Handler(Looper.getMainLooper()).postDelayed({
-                        findNavController().navigate(R.id.action_registerFragment_to_homeNavigation)
+                        findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
                     }, 1500)
                 }
             }

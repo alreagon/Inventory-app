@@ -71,6 +71,17 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/tvForgotPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/plusjakartasans_bold"
+        android:text="Forgot Password?"
+        android:textColor="@color/font_color_dark"
+        android:textSize="14sp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

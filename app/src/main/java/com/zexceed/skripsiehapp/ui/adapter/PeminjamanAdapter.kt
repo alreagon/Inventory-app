@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.zexceed.skripsiehapp.R
 import com.zexceed.skripsiehapp.data.model.Peminjaman
 import com.zexceed.skripsiehapp.databinding.ItemListPeminjamanBinding
 import java.io.File
@@ -35,7 +36,7 @@ class PeminjamanAdapter(
         notifyDataSetChanged()
     }
 
-//    fun updatePeminjamanString(list: MutableList<Char>) {
+    //    fun updatePeminjamanString(list: MutableList<Char>) {
 //        this.list = list
 //        notifyDataSetChanged()
 //    }
@@ -60,24 +61,19 @@ class PeminjamanAdapter(
                 tvItemName.text = item.namaBarang
                 tvTanggalKembali.text = item.tanggalPengembalian
                 tvPeminjam.text = item.namaPeminjam
-//                Picasso.get().load(item.foto).into(ivList)
-//                Glide.with(ivList.context).load(item.foto).into(ivList)
-
-                val folder = Environment.getExternalStorageDirectory().path
-                val files = folder
-                Log.d("Your Tag", "onCreate: ${folder}")
-                Log.d("Your Tag", "onCreate: Your files are ${files}")
-
-//                val uri = Uri.parse(item.foto[0])
-//                val pdf = File(uri.path!!)
-//                ivList.setImageBitmap(pdf)
-
-                val imgFile = File(item.foto[0])
-                val imgFileeee = item.foto[0].replace("file://","")
-
-                val imgBitmap = BitmapFactory.decodeFile(imgFileeee)
-                ivList.setImageBitmap(imgBitmap)
-
+                val foto = item.foto[0].replace("file://", "")
+                if (isValidLocalUrl(foto)) {
+                    val imgBitmap = BitmapFactory.decodeFile(foto)
+                    if (imgBitmap != null) {
+                        ivList.setImageBitmap(imgBitmap)
+                    } else {
+                        // Gambar tidak valid, tampilkan gambar acak dari drawable
+                        ivList.setImageResource(getRandomDrawable())
+                    }
+                } else {
+                    // URL tidak valid, tampilkan gambar acak dari drawable
+                    ivList.setImageResource(getRandomDrawable())
+                }
                 cardPeminjaman.setOnClickListener {
                     onItemClicked.invoke(
                         bindingAdapterPosition,
@@ -86,5 +82,23 @@ class PeminjamanAdapter(
                 }
             }
         }
+    }
+
+    private fun isValidLocalUrl(url: String): Boolean {
+        val file = File(url.replace("file://", ""))
+        return file.exists() && file.isFile
+    }
+
+    private fun getRandomDrawable(): Int {
+        val drawableList = listOf(
+            R.drawable.sapu,
+            R.drawable.gambar_atk,
+            R.drawable.gambar_basket,
+            R.drawable.gambar_kursi,
+            R.drawable.gambar_printer,
+            R.drawable.gambar_proyektor,
+            R.drawable.gambar_speaker
+        )
+        return drawableList.random()
     }
 }

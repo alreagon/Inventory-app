@@ -11,14 +11,15 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.zexceed.skripsiehapp.R
 import com.zexceed.skripsiehapp.data.model.User
+import com.zexceed.skripsiehapp.databinding.FragmentLoginBinding
 import com.zexceed.skripsiehapp.ui.viewmodel.AuthViewModel
 import com.zexceed.skripsiehapp.util.UiState
 import com.zexceed.skripsiehapp.util.hide
 import com.zexceed.skripsiehapp.util.isValidEmail
 import com.zexceed.skripsiehapp.util.show
 import com.zexceed.skripsiehapp.util.toast
-import com.zexceed.skripsiehapp.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -47,6 +48,9 @@ class LoginFragment : Fragment() {
                 )
             }
         }
+        binding.tvForgotPass.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
+        }
 
         binding.tvToregister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
@@ -62,7 +66,7 @@ class LoginFragment : Fragment() {
                 }
 
                 is UiState.Failure -> {
-                    binding.btnLogin.setText("Login")
+                    binding.btnLogin.setText("Login error!")
                     binding.pbLogin.hide()
                     toast(state.error)
                 }
@@ -122,19 +126,3 @@ class LoginFragment : Fragment() {
 
 }
 
-
-//        binding.tvForgotPass.setOnClickListener {
-//            findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
-//        }
-
-//        <TextView
-//        android:id="@+id/tvForgotPass"
-//        android:layout_width="wrap_content"
-//        android:layout_height="wrap_content"
-//        android:layout_gravity="end"
-//        android:layout_marginStart="3dp"
-//        android:layout_marginTop="16dp"
-//        android:fontFamily="@font/plusjakartasans_bold"
-//        android:text="Forgot Password?"
-//        android:textColor="@color/font_color_dark"
-//        android:textSize="14sp" />

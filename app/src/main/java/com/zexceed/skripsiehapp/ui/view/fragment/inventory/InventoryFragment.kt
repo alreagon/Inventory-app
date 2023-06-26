@@ -1,5 +1,6 @@
 package com.zexceed.skripsiehapp.ui.view.fragment.inventory
 
+import InventoryAdapter
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.zexceed.skripsiehapp.R
 import com.zexceed.skripsiehapp.data.model.User
 import com.zexceed.skripsiehapp.databinding.FragmentInventoryBinding
-import com.zexceed.skripsiehapp.ui.adapter.InventoryAdapter
 import com.zexceed.skripsiehapp.ui.viewmodel.AuthViewModel
 import com.zexceed.skripsiehapp.ui.viewmodel.InventoryViewModel
 import com.zexceed.skripsiehapp.util.UiState
@@ -58,15 +58,13 @@ class InventoryFragment : Fragment() {
     private val authViewModel: AuthViewModel by viewModels()
     var objUser: User? = null
     val adapter by lazy {
-        InventoryAdapter(
-            onItemClicked = { pos, item ->
-                findNavController().navigate(
-                    R.id.action_InventoryFragment_to_InventoryDetailFragment,
-                    Bundle().apply {
-                        putParcelable("inventory", item)
-                    })
-            }
-        )
+        InventoryAdapter { pos, item ->
+            findNavController().navigate(
+                R.id.action_InventoryFragment_to_InventoryDetailFragment,
+                Bundle().apply {
+                    putParcelable("inventory", item)
+                })
+        }
     }
 
     override fun onCreateView(

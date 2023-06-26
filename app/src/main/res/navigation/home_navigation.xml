@@ -131,8 +131,7 @@
         android:id="@+id/InventoryFragment"
         android:name="com.zexceed.skripsiehapp.ui.view.fragment.inventory.InventoryFragment"
         android:label="fragment__inventory"
-        tools:layout="@layout/fragment_inventory">
-    </fragment>
+        tools:layout="@layout/fragment_inventory"></fragment>
     <fragment
         android:id="@+id/peminjamanAddFragment"
         android:name="com.zexceed.skripsiehapp.ui.view.fragment.peminjaman.PeminjamanAddFragment"
@@ -151,7 +150,9 @@
         tools:layout="@layout/fragment_peminjaman">
         <action
             android:id="@+id/action_PeminjamanFragment_to_PeminjamanSearchFragment2"
-            app:destination="@id/peminjamanSearchFragment" />
+            app:destination="@id/peminjamanSearchFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/inventoryDetailFragment"
@@ -160,7 +161,9 @@
         tools:layout="@layout/fragment_inventory_detail">
         <action
             android:id="@+id/action_inventoryDetailFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/inventoryAddFragment"
