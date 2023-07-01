@@ -109,10 +109,10 @@ class PeminjamanFragment : Fragment() {
                 )
             }
         }
-        authViewModel.getSession {
-            viewModel.getPeminjaman(it)
+//        authViewModel.getSession {
+            viewModel.getPeminjaman()
             Log.e(TAG, "getSession: ")
-        }
+//        }
     }
 
     private fun observer() {

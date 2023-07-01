@@ -7,17 +7,6 @@
     android:background="@color/putih"
     tools:context=".ui.view.fragment.inventory.InventoryDetailFragment">
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminateTint="@color/black"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,7 +53,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:fontFamily="@font/plusjakartasans_medium"
-                        android:imeOptions="actionDone"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
                         android:maxLines="1"
                         android:text="@string/namaBarangDesk"
                         android:textColor="@color/font_color_dark"
@@ -96,7 +86,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:fontFamily="@font/plusjakartasans_medium"
-                        android:imeOptions="actionDone"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
                         android:maxLines="1"
                         android:text="@string/kodeBarangDesk"
                         android:textColor="@color/font_color_dark"
@@ -128,7 +119,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:fontFamily="@font/plusjakartasans_medium"
-                        android:imeOptions="actionDone"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
                         android:maxLines="1"
                         android:text="@string/statusDesk"
                         android:textColor="@color/font_color_dark"
@@ -160,7 +152,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:fontFamily="@font/plusjakartasans_medium"
-                        android:imeOptions="actionDone"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
                         android:maxLines="1"
                         android:text="@string/asalBarangDesk"
                         android:textColor="@color/font_color_dark"
@@ -192,7 +185,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:fontFamily="@font/plusjakartasans_medium"
-                        android:imeOptions="actionDone"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
                         android:maxLines="1"
                         android:text="@string/deskripsiBarangDesk"
                         android:textColor="@color/font_color_dark"
@@ -224,7 +218,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:fontFamily="@font/plusjakartasans_medium"
-                        android:imeOptions="actionDone"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:maxLines="1"
                         android:text="@string/catatanDesk"
                         android:textColor="@color/font_color_dark"
                         android:textSize="16sp" />
@@ -232,9 +228,70 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/llPoto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="46dp"
+                    android:layout_marginTop="16dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/tilCatatan">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plusjakartasans_regular"
+                        android:text="@string/foto_barang"
+                        android:textColor="@color/font_color_dark"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/ivFoto"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="6dp"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/ic_add_image" />
+
+
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp">
+
+                    <Button
+                        android:id="@+id/btnAddImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/button_round_sec_50"
+                        android:fontFamily="@font/plusjakartasans_bold"
+                        android:gravity="center"
+                        android:text="@string/add_image"
+                        android:textAllCaps="false"
+                        android:textColor="@color/font_color_dark"
+                        android:textSize="14sp"
+                        app:backgroundTint="@color/secondary_color_50"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ProgressBar
+                        android:id="@+id/pbAddImage"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:indeterminateTint="@color/font_color_dark"
+                        android:visibility="invisible"
+                        app:layout_constraintBottom_toBottomOf="@id/btnAddImage"
+                        app:layout_constraintEnd_toEndOf="@id/btnAddImage"
+                        app:layout_constraintStart_toStartOf="@id/btnAddImage"
+                        app:layout_constraintTop_toTopOf="@id/btnAddImage" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -273,7 +330,7 @@
 
                         <Button
                             android:id="@+id/btnEmpty"
-                            style="@style/Widget.Material3.Button.Icon"
+                            style="@style/Widget.Material3.Button"
                             android:layout_width="110dp"
                             android:layout_height="50dp"
                             android:fontFamily="@font/plusjakartasans_medium"

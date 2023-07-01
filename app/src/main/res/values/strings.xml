@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Skripsieh app</string>
+    <string name="app_name">Nyimpen</string>
     <string name="peminjam">Peminjam</string>
     <string name="asep_saepudin">Asep Saepudin</string>
     <string name="tanggal">12/13/20</string>
@@ -79,6 +79,7 @@
     <string name="btn_cancel">No</string>
     <string name="btn_logout">Yes</string>
     <string name="email_desk">BEMFilkomUB@gmail.com</string>
+    <string name="update_profile">Update Profile</string>
 
 
 </resources>

@@ -1,6 +1,8 @@
 package com.zexceed.skripsiehapp.data.repository
 
 import android.net.Uri
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.FirebaseException
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.StorageReference
@@ -19,6 +21,7 @@ class InventoryRepositoryImp(
     val storageReference: StorageReference
 ) : InventoryRepository {
 
+    private val getImageUrl = MutableLiveData<String>()
     override fun getInventory(result: (UiState<List<Inventory>>) -> Unit) {
         database.collection(FireStoreCollection.INVENTORY)
             .get()
@@ -139,6 +142,14 @@ class InventoryRepositoryImp(
             }
     }
 
+
+    override fun getImageUrl(): LiveData<String> {
+        return getImageUrl
+    }
+    fun setImageUrl(url: String) {
+        getImageUrl.value = url
+    }
+
     override suspend fun uploadSingleFile(fileUri: Uri, onResult: (UiState<Uri>) -> Unit) {
         try {
             val uri: Uri = withContext(Dispatchers.IO) {
@@ -150,6 +161,8 @@ class InventoryRepositoryImp(
                     .downloadUrl
                     .await()
             }
+            val imageUrl = uri.toString()
+            setImageUrl(imageUrl)
             onResult.invoke(UiState.Success(uri))
         } catch (e: FirebaseException) {
             onResult.invoke(UiState.Failure(e.message))
@@ -158,30 +171,35 @@ class InventoryRepositoryImp(
         }
     }
 
-    override suspend fun uploadMultipleFile(
-        fileUri: List<Uri>,
-        onResult: (UiState<List<Uri>>) -> Unit
-    ) {
-        try {
-            val uri: List<Uri> = withContext(Dispatchers.IO) {
-                fileUri.map { image ->
-                    async {
-                        storageReference.child(INVENTORY_IMAGES)
-                            .child(image.lastPathSegment ?: "${System.currentTimeMillis()}")
-                            .putFile(image)
-                            .await()
-                            .storage
-                            .downloadUrl
-                            .await()
-                    }
-                }.awaitAll()
-            }
-            onResult.invoke(UiState.Success(uri))
-        } catch (e: FirebaseException) {
-            onResult.invoke(UiState.Failure(e.message))
-        } catch (e: Exception) {
-            onResult.invoke(UiState.Failure(e.message))
-        }
-    }
-
+//    override suspend fun uploadSingleFile(fileUri: Uri, onResult: (UiState<Uri>) -> Unit) {
+//        try {
+//            val filePath =
+//                storageReference.child(INVENTORY_IMAGES).child("${System.currentTimeMillis()}")
+////            val uploadTask = filePath.putFile(Uri.parse(fileUri.toString())).await()
+//            val uploadTask = filePath.putFile(fileUri)
+//            val downloadUrl = filePath.downloadUrl.await()
+//            uploadTask.continueWithTask { getDownloadUrl ->
+//                if (!getDownloadUrl.isSuccessful) {
+//                    getDownloadUrl.exception?.let {
+//                        throw it
+//                    }
+//                }
+//                filePath.downloadUrl
+//
+//            }.addOnCompleteListener { getDownloadTaskStatus ->
+//                if (getDownloadTaskStatus.isSuccessful) {
+//                    getImageUrl.postValue(getDownloadTaskStatus.result.toString())
+//                    onResult.invoke(UiState.Success(downloadUrl))
+//                } else {
+//                    getImageUrl.postValue("")
+//                }
+//            }
+//
+//        } catch (e: Exception) {
+//            onResult.invoke(UiState.Failure(e.message))
+//        } catch (e: FirebaseException) {
+//            onResult.invoke(UiState.Failure(e.message))
+//        }
+//
+//    }
 }

@@ -211,16 +211,6 @@
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/ic_add_image" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvImages"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/add_image_ll"
-                    tools:itemCount="1"
-                    tools:listitem="@layout/image_layout" />
 
             </LinearLayout>
 
@@ -240,7 +230,6 @@
                 app:backgroundTint="@color/secondary_color_50"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/llPoto" />
-
 
             <ProgressBar
                 android:id="@+id/pbAddImage"

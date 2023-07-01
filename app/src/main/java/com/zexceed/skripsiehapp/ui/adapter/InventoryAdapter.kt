@@ -1,10 +1,13 @@
+import android.content.Context
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.zexceed.skripsiehapp.R
 import com.zexceed.skripsiehapp.data.model.Inventory
 import com.zexceed.skripsiehapp.databinding.ItemListInventoryBinding
+import kotlinx.coroutines.withContext
 import java.io.File
 
 class InventoryAdapter(
@@ -56,28 +59,16 @@ class InventoryAdapter(
                 tvItemName.text = item.namaBarang
                 tvKodeBarang.text = item.kodeBarang
                 tvStatus.text = item.status
-                val foto = item.foto[0].replace("file://", "")
-                if (isValidLocalUrl(foto)) {
-                    val imgBitmap = BitmapFactory.decodeFile(foto)
-                    if (imgBitmap != null) {
-                        ivList.setImageBitmap(imgBitmap)
-                    } else {
-                        // Gambar tidak valid, tampilkan gambar acak dari drawable
-                        ivList.setImageResource(getRandomDrawable())
-                    }
-                } else {
-                    // URL tidak valid, tampilkan gambar acak dari drawable
+                val foto = item.foto
+                if (foto.isNullOrEmpty()) {
                     ivList.setImageResource(getRandomDrawable())
+                } else {
+                    Glide.with(ivList.context).load(foto).into(ivList)
                 }
+
             }
         }
     }
-
-    private fun isValidLocalUrl(url: String): Boolean {
-        val file = File(url.replace("file://", ""))
-        return file.exists() && file.isFile
-    }
-
     private fun getRandomDrawable(): Int {
         val drawableList = listOf(
             R.drawable.sapu,

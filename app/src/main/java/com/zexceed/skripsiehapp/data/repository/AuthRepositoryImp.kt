@@ -1,5 +1,6 @@
 package com.zexceed.skripsiehapp.data.repository
 
+import android.app.backup.SharedPreferencesBackupHelper
 import android.content.ContentValues.TAG
 import android.content.SharedPreferences
 import android.util.Log
@@ -166,7 +167,10 @@ class AuthRepositoryImp(
 
     override fun logout(result: () -> Unit) {
         auth.signOut()
-        appPreferences.edit().putString(SharedPrefConstants.USER_SESSION, null).apply()
+//        appPreferences.edit().putString(SharedPrefConstants.LOCAL_SHARED_PREF, null).apply()
+//        appPreferences.edit().remove(SharedPrefConstants.LOCAL_SHARED_PREF).apply()
+        appPreferences.edit().clear().remove(SharedPrefConstants.LOCAL_SHARED_PREF).apply()
+//        appPreferences.edit()?.clear()?.apply()
         result.invoke()
     }
 

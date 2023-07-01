@@ -13,11 +13,13 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.zexceed.skripsiehapp.R
 import com.zexceed.skripsiehapp.data.model.Inventory
 import com.zexceed.skripsiehapp.databinding.FragmentInventoryAddBinding
@@ -29,6 +31,8 @@ import com.zexceed.skripsiehapp.util.hide
 import com.zexceed.skripsiehapp.util.show
 import com.zexceed.skripsiehapp.util.toast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class InventoryAddFragment : Fragment(R.layout.fragment_inventory_add) {
@@ -37,42 +41,8 @@ class InventoryAddFragment : Fragment(R.layout.fragment_inventory_add) {
     private var _binding: FragmentInventoryAddBinding? = null
     private val binding get() = _binding!!
     private val inventoryViewModel: InventoryViewModel by viewModels()
-    var isEdit = false
     private var objInventory: Inventory? = null
-    val authViewModel: AuthViewModel by viewModels()
-
-    val adapter by lazy {
-        ImageListingAdapter(
-            onCancelClicked = { pos, item -> onRemoveImage(pos, item) }
-        )
-    }
-
-        var imageUris: MutableList<Uri> = arrayListOf()
-//    private var imageUris: Uri? = null
-
-
-    private val startForProfileImageResult =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-            val resultCode = result.resultCode
-            val data = result.data
-            if (resultCode == Activity.RESULT_OK) {
-                val fileUri = data?.data!!
-                imageUris.add(fileUri)
-//                imageUris = fileUri
-                adapter.updateList(imageUris)
-                binding.ivFoto.setImageURI(fileUri)
-                binding.pbAddImage.hide()
-                binding.btnAddImage.setText("Image ready!")
-            } else if (resultCode == ImagePicker.RESULT_ERROR) {
-                binding.pbAddImage.hide()
-                binding.btnAddImage.setText("Error!")
-                toast(ImagePicker.getError(data))
-            } else {
-                binding.pbAddImage.show()
-                Log.e("TAG", "Task Cancelled")
-            }
-        }
-
+    var uriee: Uri? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -129,10 +99,6 @@ class InventoryAddFragment : Fragment(R.layout.fragment_inventory_add) {
                 etDeskripsiBarang.setText(data.deskripsiBarang)
                 etCatatan.setText(data.catatan)
             }
-            rvImages.layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            rvImages.adapter = adapter
-            rvImages.itemAnimator = null
             btnSave.setOnClickListener {
                 if (validation()) {
                     onDonePressed()
@@ -147,6 +113,7 @@ class InventoryAddFragment : Fragment(R.layout.fragment_inventory_add) {
                 .compress(1024)
                 .createIntent { intent ->
                     startForProfileImageResult.launch(intent)
+//                    getContext.launch(intent)
                 }
 
         }
@@ -155,8 +122,8 @@ class InventoryAddFragment : Fragment(R.layout.fragment_inventory_add) {
 
     private fun onDonePressed() {
         binding.apply {
-            if (imageUris.isNotEmpty()) {
-                inventoryViewModel.onUploadSingleFile(imageUris.first()) { state ->
+            if (uriee !== null) {
+                inventoryViewModel.onUploadSingleFile(uriee!!) { state ->
                     when (state) {
                         is UiState.Loading -> {
                             progressBar.show()
@@ -172,7 +139,9 @@ class InventoryAddFragment : Fragment(R.layout.fragment_inventory_add) {
                         is UiState.Success -> {
                             progressBar.hide()
                             btnSave.setText("Data Saved!")
-                            inventoryViewModel.addInventory(getInventory())
+                            getInventory { inventory ->
+                                inventoryViewModel.addInventory(inventory)
+                            }
                         }
                     }
                 }
@@ -182,19 +151,21 @@ class InventoryAddFragment : Fragment(R.layout.fragment_inventory_add) {
         }
     }
 
-    private fun getInventory(): Inventory {
+    private fun getInventory(callback: (Inventory) -> Unit) {
         binding.apply {
-            return Inventory(
-                id = objInventory?.id ?: "",
-                namaBarang = etNamaBarang.text.toString(),
-                kodeBarang = etKodeBarang.text.toString(),
-                status = etStatus.text.toString(),
-                asalBarang = etAsalBarang.text.toString(),
-                deskripsiBarang = etDeskripsiBarang.text.toString(),
-                catatan = etCatatan.text.toString(),
-                foto = getImageUrls()
-            )
-//            .apply { authViewModel.getSession { this.user_id = it?.id ?: "" } }
+            inventoryViewModel.getImageUrl.observe(viewLifecycleOwner) { urlLink ->
+                val inventory = Inventory(
+                    id = objInventory?.id ?: "",
+                    namaBarang = etNamaBarang.text?.toString() ?: "",
+                    kodeBarang = etKodeBarang.text?.toString() ?: "",
+                    status = etStatus.text?.toString() ?: "",
+                    asalBarang = etAsalBarang.text?.toString() ?: "",
+                    deskripsiBarang = etDeskripsiBarang.text?.toString() ?: "",
+                    catatan = etCatatan.text?.toString() ?: "",
+                    foto = urlLink
+                )
+                callback.invoke(inventory)
+            }
         }
     }
 
@@ -219,20 +190,26 @@ class InventoryAddFragment : Fragment(R.layout.fragment_inventory_add) {
         }
     }
 
-    private fun getImageUrls(): List<String> {
-        if (imageUris.isNotEmpty()) {
-            return imageUris.map { it.toString() }
-        } else {
-            return objInventory?.foto ?: arrayListOf()
+    private val startForProfileImageResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            val resultCode = result.resultCode
+            val data = result.data
+            if (resultCode == Activity.RESULT_OK) {
+                val fileUri: Uri = data?.data!!
+                uriee = fileUri
+                binding.ivFoto.setImageURI(fileUri)
+                binding.pbAddImage.hide()
+                binding.btnAddImage.setText("Image ready!")
+            } else if (resultCode == ImagePicker.RESULT_ERROR) {
+                binding.pbAddImage.hide()
+                binding.btnAddImage.setText("Error!")
+                toast(ImagePicker.getError(data))
+            } else {
+                binding.pbAddImage.show()
+                Log.e("TAG", "Task Cancelled")
+            }
         }
-    }
 
-    private fun onRemoveImage(pos: Int, item: Uri) {
-        adapter.removeItem(pos)
-        if (objInventory != null) {
-            binding.rvImages.performClick()
-        }
-    }
 
 //    private fun getDateInventory(): String {
 //        binding.apply {

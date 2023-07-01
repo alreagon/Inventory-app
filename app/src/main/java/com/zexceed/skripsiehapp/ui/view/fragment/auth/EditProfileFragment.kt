@@ -78,14 +78,14 @@ class EditProfileFragment : Fragment() {
                     } else if (binding.etConfirmNewPassword.text.toString().length < 8) {
                         toast(getString(R.string.invalid_confirm_new_password))
                     } else {
-//                        lifecycleScope.launch(Dispatchers.IO) {
-                        lifecycleScope.launch(Dispatchers.Main) {
-                            val message = editProfileViewModel.changeProfile(
-                                email,
-                                name,
-                                currentPassword,
-                                newPassword
-                            )
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            lifecycleScope.launch(Dispatchers.Main) {
+                                val message = editProfileViewModel.changeProfile(
+                                    email,
+                                    name,
+                                    currentPassword,
+                                    newPassword
+                                )
                                 message.observe(viewLifecycleOwner) {
                                     when (it) {
                                         "SUCCESS" -> {
@@ -113,7 +113,7 @@ class EditProfileFragment : Fragment() {
                                     }
                                 }
                             }
-//                        }
+                        }
                     }
                 }
             }

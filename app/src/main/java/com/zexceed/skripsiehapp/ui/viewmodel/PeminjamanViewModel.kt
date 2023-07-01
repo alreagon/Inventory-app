@@ -39,7 +39,7 @@ class PeminjamanViewModel @Inject constructor(
         get() = _searchResult
 
 
-    fun getPeminjaman(user: User?) {
+    fun getPeminjaman() {
         _peminjaman.value = UiState.Loading
         peminjamanRepository.getPeminjaman { _peminjaman.value = it }
     }

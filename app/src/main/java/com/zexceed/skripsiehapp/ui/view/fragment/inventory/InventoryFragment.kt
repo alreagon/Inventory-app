@@ -104,10 +104,8 @@ class InventoryFragment : Fragment() {
                 )
             }
         }
-        authViewModel.getSession {
-            viewModel.getInventory(it)
-            Log.e(TAG, "getSession: ")
-        }
+            viewModel.getInventory()
+
     }
 
     private fun observer() {

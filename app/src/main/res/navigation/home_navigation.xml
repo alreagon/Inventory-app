@@ -131,7 +131,8 @@
         android:id="@+id/InventoryFragment"
         android:name="com.zexceed.skripsiehapp.ui.view.fragment.inventory.InventoryFragment"
         android:label="fragment__inventory"
-        tools:layout="@layout/fragment_inventory"></fragment>
+        tools:layout="@layout/fragment_inventory">
+    </fragment>
     <fragment
         android:id="@+id/peminjamanAddFragment"
         android:name="com.zexceed.skripsiehapp.ui.view.fragment.peminjaman.PeminjamanAddFragment"

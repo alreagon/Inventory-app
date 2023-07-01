@@ -38,16 +38,62 @@ class EditProfileRepository {
             user?.email.toString(),
             currentPasssword
         )
+
         user!!.apply {
             //change password
             reauthenticate(credential)
                 .addOnSuccessListener {
                     user.updatePassword(newPassword).addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            _currentUserLiveData.value = auth.currentUser
-
-                            Log.w(ContentValues.TAG, task.toString())
-                            statusLiveData.postValue("SUCCESS")
+//                            _currentUserLiveData.value = auth.currentUser
+//                            Log.w(ContentValues.TAG, task.toString())
+//                            statusLiveData.postValue("SUCCESS")
+                            //update Email
+                            updateEmail(email)
+                                .addOnCompleteListener { task2 ->
+                                    if (task2.isSuccessful) {
+                                        Log.d(ContentValues.TAG, "User email address updated.")
+                                        updateProfile(profileUpdates)
+                                            .addOnCompleteListener { mTask ->
+                                                if (mTask.isSuccessful) {
+                                                    Log.d(
+                                                        ContentValues.TAG,
+                                                        "User email address updated."
+                                                    )
+                                                    val mCurrentUser = auth.currentUser
+                                                    val userUkm = User(
+                                                        mCurrentUser!!.uid,
+                                                        mCurrentUser.displayName!!,
+                                                        mCurrentUser.email!!
+                                                    )
+                                                    statusLiveData.postValue("SUCCESS")
+                                                    database.collection("user")
+                                                        .document(userUkm.id)
+                                                        .update(
+                                                            mapOf(
+                                                                "namaUkm" to userUkm.namaUkm,
+                                                                "email" to userUkm.email
+                                                            )
+                                                        )
+                                                        .addOnSuccessListener {
+                                                            _currentUserLiveData.postValue(auth.currentUser)
+                                                        }.addOnFailureListener {
+                                                            Log.d("TEZZ", "Error : $it")
+                                                            statusLiveData.postValue("$it")
+                                                            _currentUserLiveData.postValue(auth.currentUser)
+                                                        }
+                                                }
+                                            }.addOnFailureListener {
+                                                Log.d("TEZZ", "Error : $it")
+                                                statusLiveData.postValue("$it")
+                                                _currentUserLiveData.postValue(auth.currentUser)
+                                            }
+                                    }
+                                }.addOnFailureListener {
+                                    Log.d("TEZZ", "Error : $it")
+                                    statusLiveData.postValue("$it")
+                                    _currentUserLiveData.postValue(auth.currentUser)
+                                }
                         } else {
                             Log.w(ContentValues.TAG, task.exception)
                             statusLiveData.postValue("$it")
@@ -56,44 +102,6 @@ class EditProfileRepository {
                 }.addOnFailureListener {
                     Log.w(ContentValues.TAG, it)
                     statusLiveData.postValue("$it")
-                }
-            //update Email
-            updateEmail(email)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Log.d(ContentValues.TAG, "User email address updated.")
-                        updateProfile(profileUpdates)
-                            .addOnCompleteListener { mTask ->
-                                if (mTask.isSuccessful) {
-                                    Log.d(ContentValues.TAG, "User email address updated.")
-                                    val mCurrentUser = auth.currentUser
-                                    val userUkm = User(
-                                        mCurrentUser!!.uid,
-                                        mCurrentUser.displayName!!,
-                                        mCurrentUser.email!!
-                                    )
-                                    statusLiveData.postValue("SUCCESS")
-                                    database.collection("user")
-                                        .document(userUkm.id)
-                                        .update("namaUkm", userUkm.namaUkm, "email", userUkm.email)
-                                        .addOnSuccessListener {
-                                            _currentUserLiveData.postValue(auth.currentUser)
-                                        }.addOnFailureListener {
-                                            Log.d("TEZZ", "Error : $it")
-                                            statusLiveData.postValue("$it")
-                                            _currentUserLiveData.postValue(auth.currentUser)
-                                        }
-                                }
-                            }.addOnFailureListener {
-                                Log.d("TEZZ", "Error : $it")
-                                statusLiveData.postValue("$it")
-                                _currentUserLiveData.postValue(auth.currentUser)
-                            }
-                    }
-                }.addOnFailureListener {
-                    Log.d("TEZZ", "Error : $it")
-                    statusLiveData.postValue("$it")
-                    _currentUserLiveData.postValue(auth.currentUser)
                 }
         }
 

@@ -1,5 +1,6 @@
 package com.zexceed.skripsiehapp.data.model
 
+import android.net.Uri
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
@@ -9,8 +10,9 @@ data class Inventory(
     val namaBarang: String? = null,
     val kodeBarang: String? = null,
     val status: String? = null,
-    val asalBarang : String? = null,
-    val deskripsiBarang : String? = null,
+    val asalBarang: String? = null,
+    val deskripsiBarang: String? = null,
     val catatan: String? = null,
-    val foto: List<String> = arrayListOf()
+//    val foto: List<String> = arrayListOf()
+    val foto: String? =null
 ) : Parcelable

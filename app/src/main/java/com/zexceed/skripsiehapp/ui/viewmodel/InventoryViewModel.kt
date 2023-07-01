@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zexceed.skripsiehapp.data.model.Inventory
-import com.zexceed.skripsiehapp.data.model.User
 import com.zexceed.skripsiehapp.data.repository.InventoryRepository
 import com.zexceed.skripsiehapp.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -39,15 +38,16 @@ class InventoryViewModel @Inject constructor(
         get() = _searchResult
 
 
-    fun getInventory(user: User?) {
+    val getImageUrl: LiveData<String> = inventoryRepository.getImageUrl()
+
+    fun getInventory() {
         _inventory.value = UiState.Loading
         inventoryRepository.getInventory { _inventory.value = it }
     }
 
     fun searchInventory(str: String) {
         _searchResult.value = UiState.Loading
-        inventoryRepository.searchInventory(str){_searchResult.value = it}
-//    recipeRepository.injectData()
+        inventoryRepository.searchInventory(str) { _searchResult.value = it }
     }
 
 

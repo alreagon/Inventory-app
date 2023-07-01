@@ -19,7 +19,6 @@ class SplashScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_splash_screen, container, false)
     }
 
@@ -36,11 +35,6 @@ class SplashScreenFragment : Fragment() {
             }, 3000)
         } else {
             Handler(Looper.getMainLooper()).postDelayed({
-//                findNavController().navigate(
-//                    R.id.action_splashScreenFragment_to_loginFragment,
-//                    Bundle().apply {
-//                        putParcelable("user", objUser)
-//                    })
                 findNavController().navigate(R.id.action_splashScreenFragment_to_loginFragment)
             }, 3000)
         }

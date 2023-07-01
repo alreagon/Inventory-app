@@ -1,23 +1,31 @@
 package com.zexceed.skripsiehapp.ui.view.fragment.inventory
 
+import android.app.Activity
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.zexceed.skripsiehapp.R
 import com.zexceed.skripsiehapp.data.model.Inventory
 import com.zexceed.skripsiehapp.databinding.FragmentInventoryDetailBinding
 import com.zexceed.skripsiehapp.ui.adapter.ImageListingAdapter
 import com.zexceed.skripsiehapp.ui.viewmodel.InventoryViewModel
 import com.zexceed.skripsiehapp.util.UiState
+import com.zexceed.skripsiehapp.util.disable
+import com.zexceed.skripsiehapp.util.enabled
 import com.zexceed.skripsiehapp.util.hide
 import com.zexceed.skripsiehapp.util.show
 import com.zexceed.skripsiehapp.util.toast
@@ -31,13 +39,7 @@ class InventoryDetailFragment : Fragment() {
     private val binding get() = _binding!!
     val inventoryViewModel: InventoryViewModel by viewModels()
     var objInventory: Inventory? = null
-    var imageUris: MutableList<Uri> = arrayListOf()
-    val adapter by lazy {
-        ImageListingAdapter(
-            onCancelClicked = { pos, item -> onRemoveImage(pos, item) }
-        )
-    }
-
+    var uriee: Uri? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -63,12 +65,16 @@ class InventoryDetailFragment : Fragment() {
                         pbBtnSaveEdit.show()
                         btnSave.hide()
                         btnEdit.hide()
+                        btnAddImage.hide()
+                        llPoto.hide()
                         btnEmpty.show()
+                        btnEmpty.setText("")
                     }
 
                     is UiState.Failure -> {
-                        progressBar.hide()
                         btnEdit.show()
+                        btnAddImage.hide()
+                        llPoto.hide()
                         toast(state.error)
                     }
 
@@ -77,8 +83,11 @@ class InventoryDetailFragment : Fragment() {
                         toast(state.data)
                         pbBtnSaveEdit.hide()
                         btnSave.hide()
-                        btnEdit.show()
-                        btnEmpty.hide()
+                        btnEdit.hide()
+                        btnAddImage.show()
+                        llPoto.show()
+                        btnEmpty.show()
+                        btnEmpty.setText("Saved!")
                         isMakeEnableUI(false)
                         Handler(Looper.getMainLooper()).postDelayed({
                             findNavController().navigateUp()
@@ -96,7 +105,6 @@ class InventoryDetailFragment : Fragment() {
                     }
 
                     is UiState.Failure -> {
-                        progressBar.hide()
                         btnHapus.show()
                         toast(state.error)
                     }
@@ -125,22 +133,16 @@ class InventoryDetailFragment : Fragment() {
                 tvAsalBarang.setText(data.asalBarang)
                 tvDeskripsiBarang.setText(data.deskripsiBarang)
                 tvCatatan.setText(data.catatan)
-                val foto = data.foto[0].replace("file://", "")
-                if (isValidLocalUrl(foto)) {
-                    val imgBitmap = BitmapFactory.decodeFile(foto)
-                    if (imgBitmap != null) {
-                        ivItem.setImageBitmap(imgBitmap)
-                    } else {
-                        // Gambar tidak valid, tampilkan gambar acak dari drawable
-                        ivItem.setImageResource(getRandomDrawable())
-                    }
-                } else {
-                    // URL tidak valid, tampilkan gambar acak dari drawable
+                if (data.foto.isNullOrEmpty()) {
                     ivItem.setImageResource(getRandomDrawable())
+                } else {
+                    Glide.with(ivItem.context).load(data.foto).into(ivItem)
                 }
                 isMakeEnableUI(false)
                 btnSave.hide()
                 btnEdit.show()
+                btnAddImage.hide()
+                llPoto.hide()
             } ?: run {
                 tvNamaBarang.setText("")
                 tvKodeBarang.setText("")
@@ -151,14 +153,11 @@ class InventoryDetailFragment : Fragment() {
                 isMakeEnableUI(true)
                 btnSave.hide()
                 btnEdit.hide()
+                btnAddImage.hide()
+                llPoto.hide()
             }
             buttonSetup()
         }
-    }
-
-    private fun isValidLocalUrl(url: String): Boolean {
-        val file = File(url.replace("file://", ""))
-        return file.exists() && file.isFile
     }
 
     private fun getRandomDrawable(): Int {
@@ -208,6 +207,8 @@ class InventoryDetailFragment : Fragment() {
                 isMakeEnableUI(true)
                 btnSave.show()
                 btnEdit.hide()
+                btnAddImage.show()
+                llPoto.show()
                 tvNamaBarang.requestFocus()
             }
             btnSave.setOnClickListener {
@@ -215,32 +216,65 @@ class InventoryDetailFragment : Fragment() {
                     onDonePressed()
                 }
             }
+            binding.btnAddImage.setOnClickListener {
+                binding.pbAddImage.show()
+
+                btnEmpty.enabled()
+                btnEmpty.show()
+                btnEdit.disable()
+                btnSave.disable()
+                btnHapusEmpty.disable()
+                btnHapus.disable()
+                btnEmpty.setText("Image!")
+
+
+                binding.btnAddImage.setText("")
+                ImagePicker.with(this@InventoryDetailFragment)
+                    .crop()
+                    .compress(1024)
+                    .createIntent { intent ->
+                        startForProfileImageResult.launch(intent)
+                    }
+
+            }
 
             // =========
 
             tvNamaBarang.doAfterTextChanged {
                 btnSave.show()
                 btnEdit.hide()
+                btnAddImage.show()
+                llPoto.show()
             }
             tvKodeBarang.doAfterTextChanged {
                 btnSave.show()
                 btnEdit.hide()
+                btnAddImage.show()
+                llPoto.show()
             }
             tvStatus.doAfterTextChanged {
                 btnSave.show()
                 btnEdit.hide()
+                btnAddImage.show()
+                llPoto.show()
             }
             tvAsalBarang.doAfterTextChanged {
                 btnSave.show()
                 btnEdit.hide()
+                btnAddImage.show()
+                llPoto.show()
             }
             tvDeskripsiBarang.doAfterTextChanged {
                 btnSave.show()
                 btnEdit.hide()
+                btnAddImage.show()
+                llPoto.show()
             }
             tvCatatan.doAfterTextChanged {
                 btnSave.show()
                 btnEdit.hide()
+                btnAddImage.show()
+                llPoto.show()
             }
         }
     }
@@ -267,57 +301,124 @@ class InventoryDetailFragment : Fragment() {
         }
     }
 
-    private fun getInventory(): Inventory {
+    private fun getInventory(callback: (Inventory) -> Unit) {
         binding.apply {
-            return Inventory(
-                id = objInventory?.id ?: "",
-                namaBarang = tvNamaBarang.text.toString(),
-                kodeBarang = tvKodeBarang.text.toString(),
-                status = tvStatus.text.toString(),
-                asalBarang = tvAsalBarang.text.toString(),
-                deskripsiBarang = tvDeskripsiBarang.text.toString(),
-                catatan = tvCatatan.text.toString(),
-                foto = getImageUrls()
-            )
-//            .apply { authViewModel.getSession { this.user_id = it?.id ?: "" } }
-        }
-    }
-
-    private fun onRemoveImage(pos: Int, item: Uri) {
-        adapter.removeItem(pos)
-    }
-
-    private fun getImageUrls(): List<String> {
-        if (imageUris.isNotEmpty()) {
-            return imageUris.map { it.toString() }
-        } else {
-            return objInventory?.foto ?: arrayListOf()
+            inventoryViewModel.getImageUrl.observe(viewLifecycleOwner) { urlLink ->
+                val inventory = Inventory(
+                    id = objInventory?.id ?: "",
+                    namaBarang = tvNamaBarang.text?.toString() ?: "",
+                    kodeBarang = tvKodeBarang.text?.toString() ?: "",
+                    status = tvStatus.text?.toString() ?: "",
+                    asalBarang = tvAsalBarang.text?.toString() ?: "",
+                    deskripsiBarang = tvDeskripsiBarang.text?.toString() ?: "",
+                    catatan = tvCatatan.text?.toString() ?: "",
+                    foto = urlLink
+                )
+                callback.invoke(inventory)
+            }
         }
     }
 
     private fun onDonePressed() {
-        if (imageUris.isNotEmpty()) {
-            inventoryViewModel.onUploadSingleFile(imageUris.first()) { state ->
-                when (state) {
-                    is UiState.Loading -> {
-                        binding.pbBtnSaveEdit.show()
-                    }
+        binding.apply {
+            if (uriee !== null) {
+                inventoryViewModel.onUploadSingleFile(uriee!!) { state ->
+                    when (state) {
+                        is UiState.Loading -> {
+                            btnSave.hide()
+                            btnEmpty.show()
+                            pbBtnSaveEdit.show()
+                            btnEmpty.setText("")
+                        }
 
-                    is UiState.Failure -> {
-                        binding.pbBtnSaveEdit.hide()
-                        toast(state.error)
-                    }
+                        is UiState.Failure -> {
+//                            progressBar.hide()
+                            pbBtnSaveEdit.hide()
+                            btnSave.hide()
+                            btnEmpty.show()
+                            btnEmpty.setText("Error!")
+                            toast(state.error)
+                        }
 
-                    is UiState.Success -> {
-                        binding.pbBtnSaveEdit.hide()
-                        inventoryViewModel.updateInventory(getInventory())
+                        is UiState.Success -> {
+                            btnSave.show()
+                            btnSave.setText("Saved!")
+//                            toast("Data Saved! image updated!")
+                            getInventory { inventory ->
+                                inventoryViewModel.updateInventory(inventory)
+                            }
+                        }
                     }
                 }
+            } else {
+//                progressBar.hide()
+                btnAddImage.setText("Please input image!")
+                pbAddImage.hide()
+                btnSave.hide()
+                btnEmpty.show()
+                btnAddImage.show()
+
+                btnEmpty.enabled()
+                btnEdit.enabled()
+                btnSave.enabled()
+                btnHapusEmpty.disable()
+                btnAddImage.enabled()
+                btnHapus.enabled()
+
+
+                btnEmpty.setText("Image!")
             }
-        } else {
-            inventoryViewModel.updateInventory(getInventory())
         }
     }
+
+    private val startForProfileImageResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            val resultCode = result.resultCode
+            val data = result.data
+            if (resultCode == Activity.RESULT_OK) {
+                val fileUri: Uri = data?.data!!
+                uriee = fileUri
+                binding.ivFoto.setImageURI(fileUri)
+                binding.pbAddImage.hide()
+
+//                binding.btnEmpty.show()
+                binding.btnEmpty.enabled()
+                binding.btnEdit.enabled()
+                binding.btnSave.enabled()
+                binding.btnHapusEmpty.enabled()
+                binding.btnAddImage.enabled()
+                binding.btnHapus.enabled()
+                binding.btnEmpty.hide()
+                binding.btnSave.show()
+
+                binding.btnAddImage.setText("Image ready!")
+            } else if (resultCode == ImagePicker.RESULT_ERROR) {
+                binding.pbAddImage.hide()
+                binding.btnAddImage.setText("Error!")
+
+                binding.btnEmpty.show()
+                binding.btnEmpty.enabled()
+                binding.btnEdit.enabled()
+                binding.btnSave.enabled()
+                binding.btnHapusEmpty.enabled()
+                binding.btnAddImage.enabled()
+                binding.btnHapus.enabled()
+
+                toast(ImagePicker.getError(data))
+            } else {
+//                binding.pbAddImage.show()
+                binding.btnEmpty.enabled()
+                binding.btnEdit.disable()
+                binding.btnSave.hide()
+                binding.btnHapusEmpty.disable()
+
+                binding.btnEmpty.setText("Image!")
+
+                binding.btnHapus.disable()
+                binding.btnEmpty.show()
+                Log.e("TAG", "Task Cancelled")
+            }
+        }
 
     private fun isMakeEnableUI(isDisable: Boolean = false) {
         binding.apply {
@@ -329,6 +430,8 @@ class InventoryDetailFragment : Fragment() {
             tvDeskripsiBarang.isEnabled = isDisable
             tvCatatan.isEnabled = isDisable
             ivItem.isEnabled = isDisable
+            btnAddImage.hide()
+            llPoto.hide()
 
         }
 

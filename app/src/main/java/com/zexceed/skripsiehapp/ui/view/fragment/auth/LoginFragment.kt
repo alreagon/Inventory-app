@@ -39,7 +39,6 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observer()
         binding.btnLogin.setOnClickListener {
             if (validation()) {
                 viewModel.login(
@@ -47,6 +46,7 @@ class LoginFragment : Fragment() {
                     password = binding.etPassword.text.toString()
                 )
             }
+            observer()
         }
         binding.tvForgotPass.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
@@ -111,18 +111,18 @@ class LoginFragment : Fragment() {
         return isValid
     }
 
-    override fun onStart() {
-        super.onStart()
-        viewModel.getSession { user ->
-            if (user != null) {
-                findNavController().navigate(
-                    R.id.action_loginFragment_to_homeNavigation,
-                    Bundle().apply {
-                        putParcelable("user", objUser)
-                    })
-            }
-        }
-    }
+//    override fun onStart() {
+//        super.onStart()
+//        viewModel.getSession { user ->
+//            if (user != null) {
+//                findNavController().navigate(
+//                    R.id.action_loginFragment_to_homeNavigation,
+//                    Bundle().apply {
+//                        putParcelable("user", objUser)
+//                    })
+//            }
+//        }
+//    }
 
 }
 

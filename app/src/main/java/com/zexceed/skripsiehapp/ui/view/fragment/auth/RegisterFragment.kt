@@ -9,9 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.zexceed.skripsiehapp.R
 import com.zexceed.skripsiehapp.data.model.User
 import com.zexceed.skripsiehapp.ui.viewmodel.AuthViewModel
@@ -41,7 +38,6 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observer()
         binding.tvToLogin.setOnClickListener {
             findNavController().navigate(
                 R.id.action_registerFragment_to_loginFragment,
@@ -56,7 +52,7 @@ class RegisterFragment : Fragment() {
                     password = binding.etPassword.text.toString(),
                     user = getUserObj()
                 )
-
+                observer()
             }
         }
     }
