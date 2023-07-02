@@ -13,12 +13,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zexceed.skripsiehapp.R
 import com.zexceed.skripsiehapp.databinding.FragmentInventorySearchBinding
-import com.zexceed.skripsiehapp.ui.adapter.InventorySearchAdapter
 import com.zexceed.skripsiehapp.ui.viewmodel.InventoryViewModel
 import com.zexceed.skripsiehapp.util.UiState
 import com.zexceed.skripsiehapp.util.show
 import com.zexceed.skripsiehapp.util.toast
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Locale
 
 
 @AndroidEntryPoint
@@ -29,17 +29,6 @@ class InventorySearchFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: InventoryViewModel by viewModels()
     val adapterSearch by lazy {
-        InventoryAdapter(
-            onItemClicked = { pos, item ->
-                findNavController().navigate(
-                    R.id.action_inventorySearchFragment_to_inventoryDetailFragment,
-                    Bundle().apply {
-                        putParcelable("inventory", item)
-                    })
-            }
-        )
-    }
-    val adapter by lazy {
         InventoryAdapter(
             onItemClicked = { pos, item ->
                 findNavController().navigate(
@@ -77,25 +66,27 @@ class InventorySearchFragment : Fragment() {
             recyclerView.layoutManager = LinearLayoutManager(activity)
             recyclerView.adapter = adapterSearch
             //=================
-            etSearchInventory.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            etSearchInventory.setOnQueryTextListener(object :
+                SearchView.OnQueryTextListener,
                 androidx.appcompat.widget.SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(p0: String?): Boolean {
                     return false
                 }
 
                 override fun onQueryTextChange(p0: String): Boolean {
-                    observerPercobaanKeempat(p0)
+                    val query = p0.trim()
+                    observerPercobaanKeempat(query)
                     return true
                 }
-
             })
+
 
         }
 
     }
 
-    private fun observerPercobaanKeempat(str: String) {
-        viewModel.searchInventory(str)
+    private fun observerPercobaanKeempat(query: String) {
+        viewModel.searchInventory(query.toLowerCase(Locale.getDefault()))
         viewModel.searchResult.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {
@@ -110,7 +101,7 @@ class InventorySearchFragment : Fragment() {
                     binding.progressBar.visibility = View.GONE
                     binding.recyclerView.show()
                     toast(state.error)
-                    Log.d("TAG", "error bang observer utama")
+                    Log.e("TAG", "error bang observer utama")
                 }
 
                 is UiState.Success -> {

@@ -1,6 +1,5 @@
 package com.zexceed.skripsiehapp.data.repository
 
-import android.app.backup.SharedPreferencesBackupHelper
 import android.content.ContentValues.TAG
 import android.content.SharedPreferences
 import android.util.Log
@@ -46,14 +45,14 @@ class AuthRepositoryImp(
                         if (mTask.isSuccessful) {
                             Log.d(TAG, "User profile updated.")
                             val mCurrentUser = auth.currentUser
-                            val mahasiswaKos = User(
+                            val userAuth = User(
                                 mCurrentUser!!.uid,
                                 mCurrentUser.displayName!!,
                                 mCurrentUser.email!!
                             )
                             database.collection("user")
-                                .document(mahasiswaKos.id)
-                                .set(mahasiswaKos)
+                                .document(userAuth.id)
+                                .set(userAuth)
                                 .addOnSuccessListener {
 //                                    _currentUserLiveData.postValue(auth.currentUser)
 //                                    message.postValue("SUCCESS")
@@ -92,7 +91,7 @@ class AuthRepositoryImp(
                     try {
                         throw it.exception ?: java.lang.Exception("Invalid authentication")
                     } catch (e: FirebaseAuthWeakPasswordException) {
-                        result.invoke(UiState.Failure("Authentication failed, Password should be at least 6 characters"))
+                        result.invoke(UiState.Failure("Authentication failed, Password should be at least 8 characters"))
                     } catch (e: FirebaseAuthInvalidCredentialsException) {
                         result.invoke(UiState.Failure("Authentication failed, Invalid email entered"))
                     } catch (e: FirebaseAuthUserCollisionException) {
@@ -108,6 +107,18 @@ class AuthRepositoryImp(
                         it.localizedMessage
                     )
                 )
+            }
+    }
+    override fun checkEmailExists(email: String, result: (Boolean) -> Unit) {
+        auth.fetchSignInMethodsForEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val signInMethods = task.result?.signInMethods ?: emptyList()
+                    val emailExists = signInMethods.isNotEmpty()
+                    result.invoke(emailExists)
+                } else {
+                    result.invoke(false)
+                }
             }
     }
 

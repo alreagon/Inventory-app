@@ -1,6 +1,8 @@
 package com.zexceed.skripsiehapp.data.repository
 
 import android.net.Uri
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.FirebaseException
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.StorageReference
@@ -13,12 +15,14 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import java.util.Locale
 
 class PeminjamanRepositoryImp(
     val database: FirebaseFirestore,
     val storageReference: StorageReference
 ) : PeminjamanRepository {
 
+    private val getImageUrl = MutableLiveData<String>()
     override fun getPeminjaman(result: (UiState<List<Peminjaman>>) -> Unit) {
         database.collection(FireStoreCollection.PEMINJAMAN)
             .get()
@@ -45,26 +49,49 @@ class PeminjamanRepositoryImp(
         query: String,
         result: (UiState<List<Peminjaman>>) -> Unit
     ) {
+        val lowercaseQuery = query.toLowerCase(Locale.getDefault())
+
         database.collection(FireStoreCollection.PEMINJAMAN)
             .addSnapshotListener { snapshot, e ->
                 val listPeminjamanResult = mutableListOf<Peminjaman>()
                 if (snapshot != null && !snapshot.isEmpty) {
                     snapshot.forEach { mPeminjaman ->
-                        val mPeminjaman = mPeminjaman.toObject(Peminjaman::class.java)
-                        if (mPeminjaman.namaBarang!!.contains(query)) {
-                            listPeminjamanResult += mPeminjaman
+                        val peminjaman = mPeminjaman.toObject(Peminjaman::class.java)
+                        val namaBarang = peminjaman.namaBarang?.toLowerCase(Locale.getDefault())
+                        if (namaBarang?.contains(lowercaseQuery) == true) {
+                            listPeminjamanResult += peminjaman
                         }
                     }
-                    result.invoke(
-                        UiState.Success(
-                            listPeminjamanResult
-                        )
-                    )
-
+                    result.invoke(UiState.Success(listPeminjamanResult))
                 }
-
             }
     }
+
+
+//    override fun searchPeminjaman(
+//        query: String,
+//        result: (UiState<List<Peminjaman>>) -> Unit
+//    ) {
+//        database.collection(FireStoreCollection.PEMINJAMAN)
+//            .addSnapshotListener { snapshot, e ->
+//                val listPeminjamanResult = mutableListOf<Peminjaman>()
+//                if (snapshot != null && !snapshot.isEmpty) {
+//                    snapshot.forEach { mPeminjaman ->
+//                        val mPeminjaman = mPeminjaman.toObject(Peminjaman::class.java)
+//                        if (mPeminjaman.namaBarang!!.contains(query)) {
+//                            listPeminjamanResult += mPeminjaman
+//                        }
+//                    }
+//                    result.invoke(
+//                        UiState.Success(
+//                            listPeminjamanResult
+//                        )
+//                    )
+//
+//                }
+//
+//            }
+//    }
 
 
     override fun addPeminjaman(
@@ -139,6 +166,15 @@ class PeminjamanRepositoryImp(
             }
     }
 
+    override fun getImageUrl(): LiveData<String> {
+        return getImageUrl
+    }
+
+    fun setImageUrl(url: String) {
+        getImageUrl.value = url
+    }
+
+
     override suspend fun uploadSingleFile(fileUri: Uri, onResult: (UiState<Uri>) -> Unit) {
         try {
             val uri: Uri = withContext(Dispatchers.IO) {
@@ -150,6 +186,8 @@ class PeminjamanRepositoryImp(
                     .downloadUrl
                     .await()
             }
+            val imageUrl = uri.toString()
+            setImageUrl(imageUrl)
             onResult.invoke(UiState.Success(uri))
         } catch (e: FirebaseException) {
             onResult.invoke(UiState.Failure(e.message))
@@ -157,31 +195,4 @@ class PeminjamanRepositoryImp(
             onResult.invoke(UiState.Failure(e.message))
         }
     }
-
-    override suspend fun uploadMultipleFile(
-        fileUri: List<Uri>,
-        onResult: (UiState<List<Uri>>) -> Unit
-    ) {
-        try {
-            val uri: List<Uri> = withContext(Dispatchers.IO) {
-                fileUri.map { image ->
-                    async {
-                        storageReference.child(PEMINJAMAN_IMAGES)
-                            .child(image.lastPathSegment ?: "${System.currentTimeMillis()}")
-                            .putFile(image)
-                            .await()
-                            .storage
-                            .downloadUrl
-                            .await()
-                    }
-                }.awaitAll()
-            }
-            onResult.invoke(UiState.Success(uri))
-        } catch (e: FirebaseException) {
-            onResult.invoke(UiState.Failure(e.message))
-        } catch (e: Exception) {
-            onResult.invoke(UiState.Failure(e.message))
-        }
-    }
-
 }

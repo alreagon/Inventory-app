@@ -103,10 +103,8 @@ class EditProfileFragment : Fragment() {
                                         }
 
                                         else -> {
-//                                            toast("Update data success")
-                                            btnSave.setText("Saved!")
-//                                            toast("Incorrect current password!")
-//                                            btnSave.setText("Error!")
+                                            toast("Error: Incorrect current password!")
+                                            btnSave.setText("Error!")
                                             progressBar.hide()
                                             onStop()
                                         }
@@ -125,17 +123,4 @@ class EditProfileFragment : Fragment() {
 
     }
 
-    private fun btnSave() {
-        for (i in 1 downTo 0) {
-            binding.btnSave.performClick()
-        }
-    }
-
-    fun NavController.safeNavigate(direction: NavDirections) {
-        Log.d(TAG, "Click happened")
-        currentDestination?.getAction(direction.actionId)?.run {
-            Log.d(TAG, "Click Propagated")
-            navigate(direction)
-        }
-    }
 }

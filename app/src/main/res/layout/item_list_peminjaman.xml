@@ -116,6 +116,15 @@
 
         </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
+        <ImageView
+            android:id="@+id/iv_list_bg"
+            android:layout_width="130dp"
+            android:layout_height="146dp"
+            android:background="@drawable/border"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/RoundedSquare" />
+
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_list"
             android:layout_width="129dp"

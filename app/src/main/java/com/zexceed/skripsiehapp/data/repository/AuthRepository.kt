@@ -11,6 +11,7 @@ interface AuthRepository {
         result: (UiState<String>) -> Unit
     )
 
+    fun checkEmailExists(email: String, result: (Boolean) -> Unit)
     fun updateUserInfo(user: User, result: (UiState<String>) -> Unit)
     fun loginUser(email: String, password: String, result: (UiState<String>) -> Unit)
     fun forgotPassword(email: String, result: (UiState<String>) -> Unit)

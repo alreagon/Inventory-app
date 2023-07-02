@@ -45,12 +45,7 @@ class InventorySearchAdapter(
                 tvItemName.text = item.namaBarang
                 tvKodeBarang.text = item.kodeBarang
                 tvStatus.text = item.status
-//                val imgFileeee = item.foto[0].replace("file://", "")
-//                val imgBitmap = BitmapFactory.decodeFile(imgFileeee)
-//                ivList.setImageBitmap(imgBitmap)
-
                 Glide.with(ivListBorder.context).load(item.foto).into(ivListBorder)
-
                 cardInventory.setOnClickListener {
                     onItemClicked.invoke(
                         bindingAdapterPosition,

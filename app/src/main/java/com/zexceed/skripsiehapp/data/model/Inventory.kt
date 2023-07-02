@@ -13,6 +13,5 @@ data class Inventory(
     val asalBarang: String? = null,
     val deskripsiBarang: String? = null,
     val catatan: String? = null,
-//    val foto: List<String> = arrayListOf()
-    val foto: String? =null
+    val foto: String? = null
 ) : Parcelable

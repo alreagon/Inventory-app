@@ -52,7 +52,9 @@ class AuthViewModel @Inject constructor(
             user = user
         ) { _register.value = it }
     }
-
+    fun checkEmailExists(email: String, result: (Boolean) -> Unit) {
+        repository.checkEmailExists(email, result)
+    }
 
     fun login(
         email: String,

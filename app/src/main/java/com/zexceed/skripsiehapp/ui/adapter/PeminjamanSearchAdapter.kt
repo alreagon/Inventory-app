@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.zexceed.skripsiehapp.data.model.Peminjaman
 import com.zexceed.skripsiehapp.databinding.ItemListPeminjamanBinding
 import java.io.File
@@ -13,17 +14,9 @@ import java.io.File
 
 class PeminjamanSearchAdapter(
     val onItemClicked: (Int, Peminjaman) -> Unit,
-//    mList: List<Peminjaman>
 ) : RecyclerView.Adapter<PeminjamanSearchAdapter.MyViewHolder>() {
 
     private var list: MutableList<Peminjaman> = arrayListOf()
-    private lateinit var suggestions: List<String>
-//    private val mList: List<Peminjaman>
-
-//    init {
-//        this.mList = mList
-//    }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView =
@@ -41,15 +34,6 @@ class PeminjamanSearchAdapter(
         this.list = list
         notifyDataSetChanged()
     }
-
-    fun setList(suggestionList: List<String>) {
-        suggestions = suggestionList
-        notifyDataSetChanged()
-    }
-
-//    override fun getItemCount(): Int {
-//        return mList.size
-//    }
     override fun getItemCount(): Int {
         return list.size
     }
@@ -61,24 +45,7 @@ class PeminjamanSearchAdapter(
                 tvItemName.text = item.namaBarang
                 tvTanggalKembali.text = item.tanggalPengembalian
                 tvPeminjam.text = item.namaPeminjam
-//                Picasso.get().load(item.foto).into(ivList)
-//                Glide.with(ivList.context).load(item.foto).into(ivList)
-
-                val folder = Environment.getExternalStorageDirectory().path
-                val files = folder
-                Log.d("Your Tag", "onCreate: ${folder}")
-                Log.d("Your Tag", "onCreate: Your files are ${files}")
-
-//                val uri = Uri.parse(item.foto[0])
-//                val pdf = File(uri.path!!)
-//                ivList.setImageBitmap(pdf)
-
-                val imgFile = File(item.foto[0])
-                val imgFileeee = item.foto[0].replace("file://", "")
-
-                val imgBitmap = BitmapFactory.decodeFile(imgFileeee)
-                ivList.setImageBitmap(imgBitmap)
-
+                Glide.with(ivListBorder.context).load(item.foto).into(ivListBorder)
                 cardPeminjaman.setOnClickListener {
                     onItemClicked.invoke(
                         bindingAdapterPosition,

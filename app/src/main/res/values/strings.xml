@@ -56,6 +56,7 @@
     <string name="invalid_email">Invalid email address!</string>
     <string name="enter_password">Masukkan password!</string>
     <string name="invalid_password">Your password must be at least 8 characters</string>
+    <string name="invalid_email_already">Email already registered</string>
     <string name="invalid_current_password">Your current password must be at least 8 characters</string>
     <string name="invalid_new_password">Your new password must be at least 8 characters</string>
     <string name="invalid_confirm_new_password">Your confirm new password must be at least 8 characters</string>
@@ -80,6 +81,11 @@
     <string name="btn_logout">Yes</string>
     <string name="email_desk">BEMFilkomUB@gmail.com</string>
     <string name="update_profile">Update Profile</string>
+
+    <string name="title_hapus">Hapus Item</string>
+    <string name="content_hapus">Are you sure you want to remove item?</string>
+
+
 
 
 </resources>

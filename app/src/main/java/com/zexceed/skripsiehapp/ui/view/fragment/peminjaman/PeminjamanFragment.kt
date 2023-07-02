@@ -24,8 +24,6 @@ import com.zexceed.skripsiehapp.util.show
 import com.zexceed.skripsiehapp.util.toast
 import dagger.hilt.android.AndroidEntryPoint
 
-private const val ARG_PARAM0 = "param0"
-
 @AndroidEntryPoint
 class PeminjamanFragment : Fragment() {
 
@@ -58,7 +56,6 @@ class PeminjamanFragment : Fragment() {
     private var _binding: FragmentPeminjamanBinding? = null
     private val binding get() = _binding!!
     private val viewModel: PeminjamanViewModel by viewModels()
-    private val authViewModel: AuthViewModel by viewModels()
     var objUser: User? = null
     val adapter by lazy {
         PeminjamanAdapter(
@@ -76,14 +73,12 @@ class PeminjamanFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        Log.e(TAG, "onCreateView: ")
         _binding = FragmentPeminjamanBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d(TAG, "onViewCreated: ")
         observer()
         binding.apply {
             fabBase.setOnClickListener {
@@ -99,7 +94,6 @@ class PeminjamanFragment : Fragment() {
                         putParcelable("user", objUser)
                     })
             }
-            Log.d(TAG, "error bang observer utama")
             recyclerView.setHasFixedSize(true)
             recyclerView.layoutManager = LinearLayoutManager(activity)
             recyclerView.adapter = adapter
@@ -218,16 +212,6 @@ class PeminjamanFragment : Fragment() {
                 fabAdd.isClickable = false
             }
         }
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String) =
-            InventoryFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM0, param1)
-                }
-            }
     }
 
     override fun onDestroyView() {

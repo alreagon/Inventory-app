@@ -13,36 +13,27 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.dhaval2404.imagepicker.ImagePicker
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 import com.zexceed.skripsiehapp.R
 import com.zexceed.skripsiehapp.data.model.Inventory
 import com.zexceed.skripsiehapp.databinding.FragmentInventoryAddBinding
-import com.zexceed.skripsiehapp.ui.adapter.ImageListingAdapter
-import com.zexceed.skripsiehapp.ui.viewmodel.AuthViewModel
 import com.zexceed.skripsiehapp.ui.viewmodel.InventoryViewModel
 import com.zexceed.skripsiehapp.util.UiState
 import com.zexceed.skripsiehapp.util.hide
 import com.zexceed.skripsiehapp.util.show
 import com.zexceed.skripsiehapp.util.toast
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class InventoryAddFragment : Fragment(R.layout.fragment_inventory_add) {
+class InventoryAddFragment : Fragment() {
 
     val TAG: String = "InventoryAddFragment"
     private var _binding: FragmentInventoryAddBinding? = null
     private val binding get() = _binding!!
     private val inventoryViewModel: InventoryViewModel by viewModels()
     private var objInventory: Inventory? = null
-    var uriee: Uri? = null
+    var imageUri: Uri? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -113,7 +104,6 @@ class InventoryAddFragment : Fragment(R.layout.fragment_inventory_add) {
                 .compress(1024)
                 .createIntent { intent ->
                     startForProfileImageResult.launch(intent)
-//                    getContext.launch(intent)
                 }
 
         }
@@ -122,8 +112,8 @@ class InventoryAddFragment : Fragment(R.layout.fragment_inventory_add) {
 
     private fun onDonePressed() {
         binding.apply {
-            if (uriee !== null) {
-                inventoryViewModel.onUploadSingleFile(uriee!!) { state ->
+            if (imageUri !== null) {
+                inventoryViewModel.onUploadSingleFile(imageUri!!) { state ->
                     when (state) {
                         is UiState.Loading -> {
                             progressBar.show()
@@ -147,6 +137,7 @@ class InventoryAddFragment : Fragment(R.layout.fragment_inventory_add) {
                 }
             } else {
                 btnAddImage.setText("Please input image!")
+                pbAddImage.hide()
             }
         }
     }
@@ -196,7 +187,7 @@ class InventoryAddFragment : Fragment(R.layout.fragment_inventory_add) {
             val data = result.data
             if (resultCode == Activity.RESULT_OK) {
                 val fileUri: Uri = data?.data!!
-                uriee = fileUri
+                imageUri = fileUri
                 binding.ivFoto.setImageURI(fileUri)
                 binding.pbAddImage.hide()
                 binding.btnAddImage.setText("Image ready!")
@@ -210,30 +201,6 @@ class InventoryAddFragment : Fragment(R.layout.fragment_inventory_add) {
             }
         }
 
-
-//    private fun getDateInventory(): String {
-//        binding.apply {
-//            var date = ""
-//            tvTanggalPengembalian.setOnClickListener {
-//                //create new instance
-//                val datePickerFragment = DatePickerFragment()
-//                val supportFragmentManager = requireActivity().supportFragmentManager
-//
-//                //set fragment result listener
-//                supportFragmentManager.setFragmentResultListener(
-//                    "REQUEST_KEY", viewLifecycleOwner
-//                ) { resultKey, bundle ->
-//                    if (resultKey == "REQUEST_KEY") {
-//                        date = bundle.getString("SELECTED_DATE").toString()
-//                        tvTanggalPengembalian.text = date
-//                    }
-//                }
-//                // show
-//                datePickerFragment.show(supportFragmentManager, "DatePickerFragment")
-//            }
-//            return date
-//        }
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -94,7 +94,6 @@ class InventoryFragment : Fragment() {
                         putParcelable("user", objUser)
                     })
             }
-            Log.d(TAG, "error bang observer utama")
             recyclerView.setHasFixedSize(true)
             recyclerView.layoutManager = LinearLayoutManager(activity)
             recyclerView.adapter = adapter

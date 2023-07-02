@@ -218,7 +218,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:fontFamily="@font/plusjakartasans_medium"
-                        android:imeOptions="actionNext"
+                        android:imeOptions="actionDone"
                         android:inputType="text"
                         android:maxLines="1"
                         android:text="@string/catatanDesk"

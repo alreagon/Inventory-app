@@ -19,8 +19,6 @@ interface InventoryRepository {
     fun updateInventory(inventory: Inventory, result: (UiState<String>) -> Unit)
     fun deleteInventory(inventory: Inventory, result: (UiState<String>) -> Unit)
     suspend fun uploadSingleFile(fileUri: Uri, onResult: (UiState<Uri>) -> Unit)
-
-    //    suspend fun uploadMultipleFile(fileUri: List<Uri>, onResult: (UiState<List<Uri>>) -> Unit)
     fun getImageUrl(): LiveData<String>
     fun searchInventory(
         query: String,

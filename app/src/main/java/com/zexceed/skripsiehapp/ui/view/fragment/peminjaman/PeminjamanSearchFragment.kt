@@ -13,12 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.zexceed.skripsiehapp.R
 import com.zexceed.skripsiehapp.databinding.FragmentPeminjamanSearchBinding
 import com.zexceed.skripsiehapp.ui.adapter.PeminjamanAdapter
-import com.zexceed.skripsiehapp.ui.adapter.PeminjamanSearchAdapter
 import com.zexceed.skripsiehapp.ui.viewmodel.PeminjamanViewModel
 import com.zexceed.skripsiehapp.util.UiState
 import com.zexceed.skripsiehapp.util.show
 import com.zexceed.skripsiehapp.util.toast
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Locale
 
 
 @AndroidEntryPoint
@@ -29,17 +29,6 @@ class PeminjamanSearchFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: PeminjamanViewModel by viewModels()
     val adapterSearch by lazy {
-        PeminjamanAdapter(
-            onItemClicked = { pos, item ->
-                findNavController().navigate(
-                    R.id.action_PeminjamanSearchFragment_to_PeminjamanDetailFragment,
-                    Bundle().apply {
-                        putParcelable("peminjaman", item)
-                    })
-            }
-        )
-    }
-    val adapter by lazy {
         PeminjamanAdapter(
             onItemClicked = { pos, item ->
                 findNavController().navigate(
@@ -84,7 +73,8 @@ class PeminjamanSearchFragment : Fragment() {
                 }
 
                 override fun onQueryTextChange(p0: String): Boolean {
-                    observerPercobaanKeempat(p0)
+                    val query = p0.trim()
+                    observerPercobaanKeempat(query)
                     return true
                 }
 
@@ -94,8 +84,8 @@ class PeminjamanSearchFragment : Fragment() {
 
     }
 
-    private fun observerPercobaanKeempat(str: String) {
-        viewModel.searchPeminjaman(str)
+    private fun observerPercobaanKeempat(query: String) {
+        viewModel.searchPeminjaman(query.toLowerCase(Locale.getDefault()))
         viewModel.searchResult.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {

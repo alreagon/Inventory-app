@@ -1,27 +1,26 @@
 package com.zexceed.skripsiehapp.ui.view.fragment.inventory
 
 import android.app.Activity
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.zexceed.skripsiehapp.R
 import com.zexceed.skripsiehapp.data.model.Inventory
 import com.zexceed.skripsiehapp.databinding.FragmentInventoryDetailBinding
-import com.zexceed.skripsiehapp.ui.adapter.ImageListingAdapter
 import com.zexceed.skripsiehapp.ui.viewmodel.InventoryViewModel
 import com.zexceed.skripsiehapp.util.UiState
 import com.zexceed.skripsiehapp.util.disable
@@ -30,7 +29,6 @@ import com.zexceed.skripsiehapp.util.hide
 import com.zexceed.skripsiehapp.util.show
 import com.zexceed.skripsiehapp.util.toast
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.File
 
 @AndroidEntryPoint
 class InventoryDetailFragment : Fragment() {
@@ -39,7 +37,7 @@ class InventoryDetailFragment : Fragment() {
     private val binding get() = _binding!!
     val inventoryViewModel: InventoryViewModel by viewModels()
     var objInventory: Inventory? = null
-    var uriee: Uri? = null
+    var imageUri: Uri? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -79,13 +77,12 @@ class InventoryDetailFragment : Fragment() {
                     }
 
                     is UiState.Success -> {
-//                    progressBar.hide()
                         toast(state.data)
                         pbBtnSaveEdit.hide()
                         btnSave.hide()
                         btnEdit.hide()
                         btnAddImage.show()
-                        llPoto.show()
+                        llPoto.hide()
                         btnEmpty.show()
                         btnEmpty.setText("Saved!")
                         isMakeEnableUI(false)
@@ -201,7 +198,16 @@ class InventoryDetailFragment : Fragment() {
             //=============
 
             btnHapus.setOnClickListener {
-                objInventory?.let { inventoryViewModel.deleteInventory(it) }
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(resources.getString(R.string.title_hapus))
+                    .setMessage(resources.getString(R.string.content_hapus))
+                    .setNegativeButton(resources.getString(R.string.btn_cancel)) { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .setPositiveButton(resources.getString(R.string.btn_logout)) { _, _ ->
+                        objInventory?.let { inventoryViewModel.deleteInventory(it) }
+                    }
+                    .show()
             }
             btnEdit.setOnClickListener {
                 isMakeEnableUI(true)
@@ -281,9 +287,7 @@ class InventoryDetailFragment : Fragment() {
 
     private fun validation(): Boolean {
         binding.apply {
-
             var isValid = true
-
             if (
                 tvNamaBarang.text.toString().isEmpty() ||
                 tvKodeBarang.text.toString().isEmpty() ||
@@ -321,8 +325,8 @@ class InventoryDetailFragment : Fragment() {
 
     private fun onDonePressed() {
         binding.apply {
-            if (uriee !== null) {
-                inventoryViewModel.onUploadSingleFile(uriee!!) { state ->
+            if (imageUri !== null) {
+                inventoryViewModel.onUploadSingleFile(imageUri!!) { state ->
                     when (state) {
                         is UiState.Loading -> {
                             btnSave.hide()
@@ -332,7 +336,6 @@ class InventoryDetailFragment : Fragment() {
                         }
 
                         is UiState.Failure -> {
-//                            progressBar.hide()
                             pbBtnSaveEdit.hide()
                             btnSave.hide()
                             btnEmpty.show()
@@ -343,7 +346,6 @@ class InventoryDetailFragment : Fragment() {
                         is UiState.Success -> {
                             btnSave.show()
                             btnSave.setText("Saved!")
-//                            toast("Data Saved! image updated!")
                             getInventory { inventory ->
                                 inventoryViewModel.updateInventory(inventory)
                             }
@@ -351,21 +353,17 @@ class InventoryDetailFragment : Fragment() {
                     }
                 }
             } else {
-//                progressBar.hide()
                 btnAddImage.setText("Please input image!")
                 pbAddImage.hide()
                 btnSave.hide()
                 btnEmpty.show()
                 btnAddImage.show()
-
                 btnEmpty.enabled()
                 btnEdit.enabled()
                 btnSave.enabled()
                 btnHapusEmpty.disable()
                 btnAddImage.enabled()
                 btnHapus.enabled()
-
-
                 btnEmpty.setText("Image!")
             }
         }
@@ -377,11 +375,9 @@ class InventoryDetailFragment : Fragment() {
             val data = result.data
             if (resultCode == Activity.RESULT_OK) {
                 val fileUri: Uri = data?.data!!
-                uriee = fileUri
+                imageUri = fileUri
                 binding.ivFoto.setImageURI(fileUri)
                 binding.pbAddImage.hide()
-
-//                binding.btnEmpty.show()
                 binding.btnEmpty.enabled()
                 binding.btnEdit.enabled()
                 binding.btnSave.enabled()
@@ -390,12 +386,10 @@ class InventoryDetailFragment : Fragment() {
                 binding.btnHapus.enabled()
                 binding.btnEmpty.hide()
                 binding.btnSave.show()
-
                 binding.btnAddImage.setText("Image ready!")
             } else if (resultCode == ImagePicker.RESULT_ERROR) {
                 binding.pbAddImage.hide()
                 binding.btnAddImage.setText("Error!")
-
                 binding.btnEmpty.show()
                 binding.btnEmpty.enabled()
                 binding.btnEdit.enabled()
@@ -403,17 +397,13 @@ class InventoryDetailFragment : Fragment() {
                 binding.btnHapusEmpty.enabled()
                 binding.btnAddImage.enabled()
                 binding.btnHapus.enabled()
-
                 toast(ImagePicker.getError(data))
             } else {
-//                binding.pbAddImage.show()
                 binding.btnEmpty.enabled()
                 binding.btnEdit.disable()
                 binding.btnSave.hide()
                 binding.btnHapusEmpty.disable()
-
                 binding.btnEmpty.setText("Image!")
-
                 binding.btnHapus.disable()
                 binding.btnEmpty.show()
                 Log.e("TAG", "Task Cancelled")

@@ -17,5 +17,5 @@ data class Peminjaman(
     val jumlah: String? = null,
     val jaminan: String? = null,
     val catatan: String? = null,
-    val foto: List<String> = arrayListOf(),
+    val foto: String? = null
 ) : Parcelable

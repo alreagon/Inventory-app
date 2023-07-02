@@ -66,6 +66,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/nama_barang"
+                    android:imeOptions="actionNext"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="#757575" />
@@ -89,6 +90,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/kode_barang"
+                    android:imeOptions="actionNext"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="#757575" />
@@ -112,6 +114,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/nama_peminjam"
+                    android:imeOptions="actionNext"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="#757575" />
@@ -135,6 +138,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/organisasi_peminjam"
+                    android:imeOptions="actionNext"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="#757575" />
@@ -158,6 +162,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/deskripsi_barang"
+                    android:imeOptions="actionNext"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="#757575" />
@@ -181,6 +186,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/kondisi_awal"
+                    android:imeOptions="actionNext"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="#757575" />
@@ -204,6 +210,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/tanggal_peminjaman"
+                    android:imeOptions="actionNext"
+                    android:inputType="none"
+                    android:focusable="false"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="#757575" />
@@ -227,6 +236,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/tanggal_pengembalian"
+                    android:imeOptions="actionNext"
+                    android:inputType="none"
+                    android:focusable="false"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="#757575" />
@@ -250,6 +262,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/jumlah"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="#757575" />
@@ -273,6 +287,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/jaminan"
+                    android:imeOptions="actionNext"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="#757575" />
@@ -296,6 +311,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/catatan"
+                    android:imeOptions="actionDone"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="#757575" />
@@ -327,16 +343,6 @@
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/ic_add_image" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvImages"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/add_image_ll"
-                    tools:itemCount="1"
-                    tools:listitem="@layout/image_layout" />
 
             </LinearLayout>
 

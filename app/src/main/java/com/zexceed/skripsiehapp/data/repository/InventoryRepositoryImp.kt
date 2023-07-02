@@ -11,10 +11,9 @@ import com.zexceed.skripsiehapp.util.FireStoreCollection
 import com.zexceed.skripsiehapp.util.FirebaseStorageConstants.INVENTORY_IMAGES
 import com.zexceed.skripsiehapp.util.UiState
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import java.util.Locale
 
 class InventoryRepositoryImp(
     val database: FirebaseFirestore,
@@ -43,31 +42,51 @@ class InventoryRepositoryImp(
                 )
             }
     }
-
     override fun searchInventory(
         query: String,
         result: (UiState<List<Inventory>>) -> Unit
     ) {
+        val lowercaseQuery = query.toLowerCase(Locale.getDefault())
+
         database.collection(FireStoreCollection.INVENTORY)
             .addSnapshotListener { snapshot, e ->
                 val listInventoryResult = mutableListOf<Inventory>()
                 if (snapshot != null && !snapshot.isEmpty) {
                     snapshot.forEach { mInventory ->
-                        val mInventory = mInventory.toObject(Inventory::class.java)
-                        if (mInventory.namaBarang!!.contains(query)) {
-                            listInventoryResult += mInventory
+                        val inventory = mInventory.toObject(Inventory::class.java)
+                        val namaBarang = inventory.namaBarang?.toLowerCase(Locale.getDefault())
+                        if (namaBarang?.contains(lowercaseQuery) == true) {
+                            listInventoryResult += inventory
                         }
                     }
-                    result.invoke(
-                        UiState.Success(
-                            listInventoryResult
-                        )
-                    )
-
+                    result.invoke(UiState.Success(listInventoryResult))
                 }
-
             }
     }
+//    override fun searchInventory(
+//        query: String,
+//        result: (UiState<List<Inventory>>) -> Unit
+//    ) {
+//        database.collection(FireStoreCollection.INVENTORY)
+//            .addSnapshotListener { snapshot, e ->
+//                val listInventoryResult = mutableListOf<Inventory>()
+//                if (snapshot != null && !snapshot.isEmpty) {
+//                    snapshot.forEach { mInventory ->
+//                        val mInventory = mInventory.toObject(Inventory::class.java)
+//                        if (mInventory.namaBarang!!.contains(query)) {
+//                            listInventoryResult += mInventory
+//                        }
+//                    }
+//                    result.invoke(
+//                        UiState.Success(
+//                            listInventoryResult
+//                        )
+//                    )
+//
+//                }
+//
+//            }
+//    }
 
 
     override fun addInventory(
@@ -170,36 +189,4 @@ class InventoryRepositoryImp(
             onResult.invoke(UiState.Failure(e.message))
         }
     }
-
-//    override suspend fun uploadSingleFile(fileUri: Uri, onResult: (UiState<Uri>) -> Unit) {
-//        try {
-//            val filePath =
-//                storageReference.child(INVENTORY_IMAGES).child("${System.currentTimeMillis()}")
-////            val uploadTask = filePath.putFile(Uri.parse(fileUri.toString())).await()
-//            val uploadTask = filePath.putFile(fileUri)
-//            val downloadUrl = filePath.downloadUrl.await()
-//            uploadTask.continueWithTask { getDownloadUrl ->
-//                if (!getDownloadUrl.isSuccessful) {
-//                    getDownloadUrl.exception?.let {
-//                        throw it
-//                    }
-//                }
-//                filePath.downloadUrl
-//
-//            }.addOnCompleteListener { getDownloadTaskStatus ->
-//                if (getDownloadTaskStatus.isSuccessful) {
-//                    getImageUrl.postValue(getDownloadTaskStatus.result.toString())
-//                    onResult.invoke(UiState.Success(downloadUrl))
-//                } else {
-//                    getImageUrl.postValue("")
-//                }
-//            }
-//
-//        } catch (e: Exception) {
-//            onResult.invoke(UiState.Failure(e.message))
-//        } catch (e: FirebaseException) {
-//            onResult.invoke(UiState.Failure(e.message))
-//        }
-//
-//    }
 }
